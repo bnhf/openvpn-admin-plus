@@ -21,7 +21,7 @@ export PIVPN_SERVER=$(awk -F= '/server/ {print $2}' \
   | awk -F/ '{print $1}')
 
 echo "PiVPN Server set to" $PIVPN_SERVER
-cd /opt/openvpn-gui
+cd /opt/openvpn-gui-tap
 echo "Working directory set to" $PWD
 mkdir -p db
 echo "Starting!"

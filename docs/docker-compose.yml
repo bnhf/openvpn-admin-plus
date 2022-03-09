@@ -2,7 +2,7 @@ version: '2'
 services:
   gui:
     image: bnhf/pivpn-tap-web-ui
-    container_name: openvpn-gui
+    container_name: openvpn-gui-tap
     environment:
     - OPENVPN_ADMIN_USERNAME=admin
     - OPENVPN_ADMIN_PASSWORD=b3secure
@@ -18,4 +18,4 @@ services:
     restart: always
     volumes:
      - /etc/openvpn:/etc/openvpn
-     - ./openvpn-data/db:/opt/openvpn-gui/db
+     - ./openvpn-data/db:/opt/openvpn-gui-tap/db
