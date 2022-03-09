@@ -25,6 +25,6 @@ cd /opt/openvpn-gui
 echo "Working directory set to" $PWD
 mkdir -p db
 echo "Starting!"
-./openvpn-tap-external-web-ui
+./pivpn-tap-web-ui
 
 

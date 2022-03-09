@@ -1,4 +1,4 @@
-# OpenVPN-TAP-external-web-ui
+# pivpn-tap-web-ui
 
 ## Summary
 OpenVPN TAP (bridge) external server (non-Docker) web administration interface. Intended for use with PiVPN (on amd64 versions of Debian or Ubuntu, or on ARM64/ARMv7 with Raspberry Pi OS). PiVPN should be installed first!  Recently adapted to work with host-installed TUN servers too.
@@ -98,8 +98,8 @@ Optional, but recommended:
 
 Execute commands:
 
-    go get github.com/bnhf/openvpn-tap-external-web-ui
-    cd $GOPATH/src/github.com/bnhf/openvpn-tap-external-web-ui
+    go get github.com/bnhf/pivpn-tap-web-ui
+    cd $GOPATH/src/github.com/bnhf/pivpn-tap-web-ui
     go mod tidy
     bee run -gendoc=true
     bee pack -exr='^vendor|^data.db|^build|^README.md|^docs'
@@ -109,7 +109,7 @@ Execute commands:
 For building on ARMv7:
 
     In the dockerfile inside the build folder, comment out debian:bullseye as a source, and uncomment balenalib/raspberry-pi-debian:latest
-    In build.sh, change the docker build to <your-docker-hub-repo-here>/openvpn-tap-external-web-ui:armv7
+    In build.sh, change the docker build to <your-docker-hub-repo-here>/pivpn-tap-web-ui:armv7
     It's highly recommended that you use Visual Studio Code with the "Remote - SSH" extension (in addition to the "Go" extension of course) from a more powerful machine
     
 

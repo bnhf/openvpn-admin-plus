@@ -2,14 +2,15 @@ package controllers
 
 import (
 	"html/template"
+	"os"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/bnhf/go-openvpn/server/config"
 
 	//	mi "github.com/bnhf/go-openvpn/server/mi"
-	"github.com/bnhf/openvpn-tap-external-web-ui/lib"
-	"github.com/bnhf/openvpn-tap-external-web-ui/models"
+	"github.com/bnhf/pivpn-tap-web-ui/lib"
+	"github.com/bnhf/pivpn-tap-web-ui/models"
 )
 
 type OVConfigController struct {
@@ -49,7 +50,7 @@ func (c *OVConfigController) Post() {
 	lib.Dump(cfg)
 	c.Data["Settings"] = &cfg
 
-	destPath := models.GlobalCfg.OVConfigPath + "/server.conf"
+	destPath := models.GlobalCfg.OVConfigPath + "/" + os.Getenv("PIVPN_CONF")
 	err := config.SaveToFile("conf/openvpn-server-config.tpl", cfg.Config, destPath)
 	if err != nil {
 		beego.Warning(err)

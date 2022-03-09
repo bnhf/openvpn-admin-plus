@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/bnhf/openvpn-tap-external-web-ui/models"
+	"github.com/bnhf/pivpn-tap-web-ui/models"
 )
 
 type BaseController struct {

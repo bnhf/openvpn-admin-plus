@@ -2,10 +2,10 @@
 
 set -e
 
-PKGFILE=openvpn-tap-external-web-ui.tar.gz
+PKGFILE=pivpn-tap-web-ui.tar.gz
 
 cp -f ../$PKGFILE ./
 
-docker build -t bnhf/openvpn-tap-external-web-ui .
+docker build -t bnhf/pivpn-tap-web-ui .
 
 rm -f $PKGFILE

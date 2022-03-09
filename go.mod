@@ -1,4 +1,4 @@
-module github.com/bnhf/openvpn-tap-external-web-ui
+module github.com/bnhf/pivpn-tap-web-ui
 
 go 1.17
 

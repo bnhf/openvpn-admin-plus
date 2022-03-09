@@ -1,6 +1,6 @@
 package controllers
 
-import "github.com/bnhf/openvpn-tap-external-web-ui/lib"
+import "github.com/bnhf/pivpn-tap-web-ui/lib"
 
 //APISysloadController provides system information
 type APISysloadController struct {
