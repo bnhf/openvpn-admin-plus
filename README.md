@@ -1,11 +1,17 @@
-# pivpn-tap-web-ui
+# PiVPN-TAP-web-ui
 
 ## Summary
-OpenVPN TAP (bridge) external server (non-Docker) web administration interface. Intended for use with PiVPN (on amd64 versions of Debian or Ubuntu, or on ARM64/ARMv7 with Raspberry Pi OS). PiVPN should be installed first!  Recently adapted to work with host-installed TUN servers too.
+OpenVPN TAP (bridge) or TUN host-based server (non-Docker) web administration interface. Intended for use with PiVPN (on amd64 versions of Debian or Ubuntu, or on ARM64/ARMv7 with Raspberry Pi OS). PiVPN should be installed first!  Recently adapted to work with host-installed TUN servers too.
 
 Here's a post on setting PiVPN in TAP server mode. It's written for the Raspberry Pi, but the steps are the same on Debian or Ubuntu. One exception is your physical ethernet adapter, which will likely not be eth0 in the openvpn-bridge script:
 
 https://technologydragonslayer.com/2022/01/16/installing-an-openvpn-tap-server-on-a-raspberry-pi-using-pivpn/
+
+Also, on Debian 11 and its derivations, the bridge-conf, bridge-start and bridge-stop scripts defined here work much better than the classic openvpn-bridge script for TAP installations:
+
+[bridge-scripts](https://gist.github.com/Belphemur/3b03eaad96172b2159fc)
+
+No need to replace your openvpn@.service file, just insert the bridge-start and bridge-stop lines in the same relative locations in your existing file. build-client and server.conf are not needed either.
 
 Goal: create quick to deploy and easy to use solution that makes work with small OpenVPN environments a breeze.
 

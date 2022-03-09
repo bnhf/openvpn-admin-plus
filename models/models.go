@@ -112,8 +112,8 @@ func createDefaultOVConfig() {
 			Ca:                  "easy-rsa/pki/ca.crt",
 			Cert:                "easy-rsa/pki/issued/" + os.Getenv("PIVPN_SERVER") + ".crt",
 			Key:                 "easy-rsa/pki/private/" + os.Getenv("PIVPN_SERVER") + ".key",
-			ExtraServerOptions:  "push \"route 0.0.0.0 255.255.255.255 net_gateway\"\nclient-to-client\n# push block-outside-dns\n# push \"redirect-gateway def1\"\n# client-config-dir /etc/openvpn/ccd\n# duplicate-cn\nmax-clients 100\n",
-			ExtraClientOptions:  "dev tap\n# dev tun\n# lport 0",
+			ExtraServerOptions:  "push \"route 0.0.0.0 255.255.255.255 net_gateway\"\nclient-to-client\n# push block-outside-dns\n# push \"redirect-gateway def1\"\n# client-config-dir /etc/openvpn/ccd\n# duplicate-cn\nmax-clients 100\n# compress lz4-v2\n",
+			ExtraClientOptions:  "dev tap\n# dev tun\n# lport 0\n# compress lz4-v2\n",
 			PiVPNServer:         os.Getenv("PIVPN_SERVER"),
 		},
 	}

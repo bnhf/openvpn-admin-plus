@@ -28,5 +28,3 @@ auth-nocache
 <tls-crypt>
 {{ .Ta }}
 </tls-crypt>
-
-# comp-lzo

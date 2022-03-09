@@ -21,4 +21,3 @@ cert {{ .Cert }}
 key {{ .Key }}
 ta {{ .Ta }}
 
-# comp-lzo

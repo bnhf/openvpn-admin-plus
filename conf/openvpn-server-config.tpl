@@ -22,7 +22,6 @@ tls-crypt {{ .CCEncryption }}
 cipher {{ .Cipher }}
 auth {{ .Auth }}
 
-# comp-lzo
 persist-key
 persist-tun
 crl-verify /etc/openvpn/crl.pem
