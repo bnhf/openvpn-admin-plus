@@ -67,15 +67,15 @@ Requirements:
 * Docker, Portainer, PiVPN, Debian or Ubuntu
 * on firewall open ports: 8080/tcp
 
-Setup your Portainer Stacks page as shown on an amd64 machine running Debian or Ubuntu, inserting environment variables for creating certificates.  Also, you'll need the unique ID assigned by PiVPN to the server (the name used for the server certificate and key, which is the hostname followed by a series of numbers, letters and dashes):
+Setup your Portainer Stacks page as shown on an amd64 machine running Debian or Ubuntu, inserting environment variables for creating certificates. Also, you'll need the unique ID assigned by PiVPN to the server (the name used for the server certificate and key, which is the hostname followed by a series of numbers, letters and dashes). And finally, you'll need to supply the name of the server configuration file you'd like to use (usually server.conf):
 
-![screenshot-nuc10-pc2_9443-2022 03 09-07_41_00](https://user-images.githubusercontent.com/41088895/157467979-b19c1085-68ac-4d89-8b38-ce7b3161f016.png)
+![screenshot-brix-pc2_9000-2022 03 09-13_28_03](https://user-images.githubusercontent.com/41088895/157535447-3bde8e7b-1d48-41a8-8664-d11195982283.png)
 
-Setup your Portainer Stacks page as shown on an ARMv7 running the Raspberry Pi OS, inserting environment variables for creating certificates (grab the contents of the docker-compose.yml in the docs folder, and add a :armv7 as a tag after the container name):
+Setup your Portainer Stacks page as shown on an ARMv7 running the Raspberry Pi OS, inserting environment variables for creating certificates (grab the contents of the docker-compose.yml in the docs folder, and add a :armv7 as a tag after the container name). Also, you'll need the unique ID assigned by PiVPN to the server (the name used for the server certificate and key, which is the hostname followed by a series of numbers, letters and dashes). And finally, you'll need to supply the name of the server configuration file you'd like to use (usually server.conf). See the above amd64 screenshot for current env variable requirements.:
 
 ![screenshot-raspberrypi6_9000-2022 03 09-07_44_40](https://user-images.githubusercontent.com/41088895/157468105-f679a703-f02b-48c4-abcb-7e54b8255525.png)
 
-Setup your Portainer Stacks page as shown on an ARM64 running the Raspberry Pi OS, inserting environment variables for creating certificates. Also, you'll need the unique ID assigned by PiVPN to the server (grab the contents of the docker-compose.yml in the docs folder, and add a :arm64 as a tag after the container name):
+Setup your Portainer Stacks page as shown on an ARM64 running the Raspberry Pi OS, inserting environment variables for creating certificates (grab the contents of the docker-compose.yml in the docs folder, and add a :arm64 as a tag after the container name). Also, you'll need the unique ID assigned by PiVPN to the server (the name used for the server certificate and key, which is the hostname followed by a series of numbers, letters and dashes). And finally, you'll need to supply the name of the server configuration file you'd like to use (usually server.conf). See the above amd64 screenshot for current env variable requirements.:
 
 ![screenshot-raspberrypi5_9000-2022 03 09-07_46_28](https://user-images.githubusercontent.com/41088895/157468989-bbb6b400-cc78-43d9-a19e-4e45d22e161a.png)
 
