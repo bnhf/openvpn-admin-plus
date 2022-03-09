@@ -1,0 +1,187 @@
+{{ template "layout/base.html" . }}
+
+{{define "head"}}
+<title>OpenVPN - Settings</title>
+{{end}}
+
+{{define "body"}}
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Edit configuration</h3>
+  </div>
+  <!-- /.box-header -->
+  <!-- form start -->
+  {{template "common/alert.html" .}}
+  <form role="form" action="{{urlfor "OVConfigController.Post"}}" method="post">
+    <div class="box-body">
+      <div class="form-group">
+        <label for="name">Profile</label>
+        <input type="text" class="form-control" name="Profile" id="Profile" disabled
+          value="{{ .Settings.Profile }}">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Dev</label>
+        <input type="text" class="form-control" name="Dev" id="Dev" placeholder=""
+          value="{{ .Settings.Dev }}">
+        <span class="help-block">Which tunnel or bridge should OpenVPN use</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Port</label>
+        <input type="text" class="form-control" name="Port" id="Port" placeholder=""
+          value="{{ .Settings.Port }}">
+        <span class="help-block">Which TCP/UDP port should OpenVPN listen on</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Proto</label>
+        <input type="text" class="form-control" name="Proto" id="Proto" placeholder="Enter network name"
+          value="{{ .Settings.Proto }}">
+        <span class="help-block">TCP or UDP server</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">DNSServerOne</label>
+        <input type="text" class="form-control" name="DNSServerOne" id="DNSServerOne" placeholder="Enter the first DNS server"
+          value="{{ .Settings.DNSServerOne }}">
+        <span class="help-block">Enter the first DNS server</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">DNSServerTwo</label>
+        <input type="text" class="form-control" name="DNSServerTwo" id="DNSServerTwo" placeholder="Enter the second DNS server"
+          value="{{ .Settings.DNSServerTwo }}">
+        <span class="help-block">Enter the second DNS server</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">CA cert</label>
+        <input type="text" class="form-control" name="Ca" id="Ca" placeholder="Enter CA certificate path"
+          value="{{ .Settings.Ca }}">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Server certificate</label>
+        <input type="text" class="form-control" name="Cert" id="Cert" placeholder="Enter server certificate path"
+          value="{{ .Settings.Cert }}">
+        <span id="helpBlock" class="help-block"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Server key</label>
+        <input type="text" class="form-control" name="Key" id="Key" placeholder="Enter server private key path"
+          value="{{ .Settings.Key }}">
+        <span id="helpBlock" class="help-block"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Cipher</label>
+        <input type="text" class="form-control" name="Cipher" id="Cipher" placeholder=""
+          value="{{ .Settings.Cipher }}">
+        <span id="helpBlock" class="help-block"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Auth</label>
+        <input type="text" class="form-control" name="Auth" id="Auth" placeholder=""
+          value="{{ .Settings.Auth }}">
+        <span id="helpBlock" class="help-block"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Dh</label>
+        <input type="text" class="form-control" name="Dh" id="Dh" placeholder=""
+          value="{{ .Settings.Dh }}">
+        <span id="helpBlock" class="help-block">Diffie hellman parameters</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Server</label>
+        <input type="text" class="form-control" name="Server" id="Server" placeholder=""
+          value="{{ .Settings.Server }}">
+        <span id="helpBlock" class="help-block">Specify server-bridge or server mode and supply an IP range
+            for OpenVPN to draw client addresses from</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Keepalive</label>
+        <input type="text" class="form-control" name="Keepalive" id="Keepalive" placeholder=""
+          value="{{ .Settings.Keepalive }}">
+        <span id="helpBlock" class="help-block">The keepalive directive causes ping-like
+          messages to be sent back and forth over
+          the link so that each side knows when
+          the other side has gone down.
+          Ping every 10 seconds, assume that remote
+          peer is down if no ping received during
+          a 120 second time period.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">IfconfigPoolPersist</label>
+        <input type="text" class="form-control" name="IfconfigPoolPersist" id="IfconfigPoolPersist" placeholder=""
+          value="{{ .Settings.IfconfigPoolPersist }}">
+        <span id="helpBlock" class="help-block">
+          Maintain a record of client <-> virtual IP address
+            associations in this file.  If OpenVPN goes down or
+            is restarted, reconnecting clients can be assigned
+            the same virtual IP address from the pool that was
+            previously assigned.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Control Channel Encryption</label>
+        <input type="text" class="form-control" name="CCEncryption" id="CCEncryption" placeholder=""
+          value="{{ .Settings.CCEncryption }}">
+        <span id="helpBlock" class="help-block">Path for the key used
+            to encrypt the TLS Control Channel</span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Extra Server Options</label>
+        <textarea type="text" class="form-control" name="ExtraServerOptions" 
+          id="ExtraServerOptions">{{ .Settings.ExtraServerOptions }}</textarea>
+        <span id="helpBlock" class="help-block">Extra server options to add to the config. 
+          # indicates option will not be used. push block-outside DNS and push redirect-gateway
+          should not be used in a bridge setup.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Extra Client Options</label>
+        <textarea type="text" class="form-control" name="ExtraClientOptions" 
+          id="ExtraClientOptions">{{ .Settings.ExtraClientOptions }}</textarea>
+        <span id="helpBlock" class="help-block">Extra client options to add to the generated client configs.
+            # indicates option will not be used. Either dev tun (tunnel) or dev tap (bridge) must be enabled!
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">PiVPN OpenVPN Server Name</label>
+        <input type="text" class="form-control" name="PiVPNServer" id="PiVPNServer" placeholder=""
+          value="{{ .Settings.PiVPNServer }}">
+        <span id="helpBlock" class="help-block">Unique name assigned by PiVPN for the 
+            server certificate and key
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Management</label>
+        <input type="text" class="form-control" name="Management" id="Management" placeholder=""
+          value="{{ .Settings.Management }}">
+        <span id="helpBlock" class="help-block">IP address and port number for
+            the OpenVPN Management Interface</span>
+      </div>
+
+      {{ .xsrfdata }}
+    </div>
+    <!-- /.box-body -->
+
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary">Save and apply</button>
+    </div>
+  </form>
+
+</div>
+<!-- /.box -->
+{{end}}

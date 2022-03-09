@@ -1,0 +1,21 @@
+version: '2'
+services:
+  gui:
+    image: bnhf/openvpn-tap-external-web-ui
+    container_name: openvpn-gui
+    environment:
+    - OPENVPN_ADMIN_USERNAME=admin
+    - OPENVPN_ADMIN_PASSWORD=b3secure
+    - COUNTRY=${COUNTRY}
+    - PROVINCE=${PROVINCE}
+    - CITY=${CITY}
+    - ORG=${ORG}
+    - EMAIL=${EMAIL}
+    - OU=${OU}
+    - PIVPN_SERVER=${PIVPN_SERVER}
+    ports:
+     - "8080:8080/tcp"
+    restart: always
+    volumes:
+     - /etc/openvpn:/etc/openvpn
+     - ./openvpn-data/db:/opt/openvpn-gui/db
