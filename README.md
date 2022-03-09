@@ -87,6 +87,18 @@ This fork uses a single docker container with the OpenVPNAdmin web application. 
          └── db
             └── data.db
 
+### User
+
+Requirements:
+* [docker](https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script)
+
+Optional, but highly recommended:
+* [Portainer](https://docs.portainer.io/v/ce-2.9/start/install/server/docker/linux)
+* [cockpit-project](https://cockpit-project.org)
+* [cockpit-navigator plugin](https://cockpit-project.org/applications)
+* [organizr-Docker](https://hub.docker.com/r/organizr/organizr)
+
+Portainer, Cockpit and pivpn-tap-web-ui can all be added as "vertical" tabs in organizr, for a clean single tab in your browser. All are iFrame compatible when accessed via http:// -- it'll work with https:// too, but not in iFrames.
 
 ### Dev
 
@@ -112,18 +124,18 @@ Execute commands:
     cd build
     ./build.sh
     
-For building on ARMv7:
+For building on ARM64 or ARMv7:
 
-    In the dockerfile inside the build folder, comment out debian:bullseye as a source, and uncomment balenalib/raspberry-pi-debian:latest
-    In build.sh, change the docker build to <your-docker-hub-repo-here>/pivpn-tap-web-ui:armv7
+    In the dockerfile inside the build folder, comment out debian:bullseye as a source, and uncomment balenalib/raspberry-pi-debian:latest (ARMv7 only)
+    In build.sh, change the docker build to <your-docker-hub-repo-here>/pivpn-tap-web-ui:arm64 (or armv7)
     It's highly recommended that you use Visual Studio Code with the "Remote - SSH" extension (in addition to the "Go" extension of course) from a more powerful machine
     
 
 ## Todo
 
 * ARMv7 version for the Raspberry Pi -- Done!
-* Update "Memory usage" on the status page to display more accurate data
-* Add certificate revocation from the GUI -- currently can be done only from the commandline via PiVPN -r username
+* Update "Memory usage" on the status page to display more accurate data -- Issue reported to Cloud Foundry
+* Add certificate revocation from the GUI -- currently can be done only from the commandline via PiVPN -r username (or in the Cockpit Terminal!)
 
 
 ## License
