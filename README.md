@@ -100,6 +100,8 @@ Optional, but highly recommended:
 
 Portainer, Cockpit and pivpn-tap-web-ui can all be added as "vertical" tabs in organizr, for a clean single tab in your browser. All are iFrame compatible when accessed via http:// -- it'll work with https:// too, but not in iFrames.
 
+![screenshot-nuc10-pc2-2022 03 09-14_45_09](https://user-images.githubusercontent.com/41088895/157541809-7aa4b827-9c9c-411a-9d3b-2b47fd330c31.png)
+
 ### Dev
 
 Requirements:
