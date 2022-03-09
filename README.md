@@ -23,7 +23,7 @@ If you have docker and Portainer installed, you can jump directly to [installati
 If you have a functioning OpenVPN TAP or TUN Server on the same host as your Docker containers, you should be able
 to use this fork to monitor OpenVPN connections.
 
-Certificate generation and management is also available, and should be compatible with PiVPN. You can use either this web-ui to create client certificates, or use PiVPN from the commandline. Use PiVPN from the commandline (with elevated priveleges) to revoke certificates.
+Certificate generation and management is also available, and should be compatible with PiVPN. You can use either this web-ui to create client certificates, or use PiVPN from the commandline. Use PiVPN from the commandline (with elevated privileges) to revoke certificates.
 
 ## Motivation
 
@@ -97,10 +97,11 @@ Optional, but highly recommended:
 * [cockpit-project](https://cockpit-project.org)
 * [cockpit-navigator plugin](https://cockpit-project.org/applications)
 * [organizr-Docker](https://hub.docker.com/r/organizr/organizr)
+* [watchtower](https://hub.docker.com/r/containrrr/watchtower)
 
-Portainer, Cockpit and pivpn-tap-web-ui can all be added as "vertical" tabs in organizr, for a clean single tab in your browser. All are iFrame compatible when accessed via http:// -- it'll work with https:// too, but not in iFrames.
+Portainer, Cockpit and pivpn-tap-web-ui can all be added as "vertical" tabs in organizr, for a clean single tab in your browser. All are iFrame compatible when accessed via http:// -- it'll work with https:// too, but not in the iFrame (new tab will open). watchtower can be setup to run once and then stop, updating all of your containers (including Portainer and watchtower itself).
 
-![screenshot-nuc10-pc2-2022 03 09-14_45_09](https://user-images.githubusercontent.com/41088895/157541809-7aa4b827-9c9c-411a-9d3b-2b47fd330c31.png)
+![screenshot-brix-pc2-2022 03 09-14_50_38](https://user-images.githubusercontent.com/41088895/157542989-5f13f2e5-8b69-4958-a3dc-95270485efc0.png)
 
 ### Dev
 
