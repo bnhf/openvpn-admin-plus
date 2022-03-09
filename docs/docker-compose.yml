@@ -13,6 +13,7 @@ services:
     - EMAIL=${EMAIL}
     - OU=${OU}
     - PIVPN_SERVER=${PIVPN_SERVER}
+    - PIVPN_CONF=${PIVPN_CONF}
     ports:
      - "8080:8080/tcp"
     restart: always
