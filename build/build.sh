@@ -6,6 +6,6 @@ PKGFILE=pivpn-tap-web-ui.tar.gz
 
 cp -f ../$PKGFILE ./
 
-docker build -t bnhf/pivpn-tap-web-ui .
+docker build -t bnhf/pivpn-tap-web-ui:manifest-amd64 --build-arg ARCH=amd64/ .
 
 rm -f $PKGFILE
