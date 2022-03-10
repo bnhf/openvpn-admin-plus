@@ -1,7 +1,7 @@
 version: '2'
 services:
   gui:
-    image: bnhf/pivpn-tap-web-ui
+    image: bnhf/pivpn-tap-web-ui:manifest-latest
     container_name: openvpn-gui-tap
     environment:
     - OPENVPN_ADMIN_USERNAME=admin
