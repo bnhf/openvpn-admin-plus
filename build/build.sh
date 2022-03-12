@@ -12,6 +12,6 @@ cp -f ../$PKGFILE ./
 # docker build -t bnhf/pivpn-tap-web-ui:manifest-armv7 --build-arg ARCH=armv7/ .
 
 # Multi-arch the buildx way
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t bnhf/pivpn-tap-web-ui .
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t bnhf/pivpn-tap-web-ui . --push
 
 rm -f $PKGFILE
