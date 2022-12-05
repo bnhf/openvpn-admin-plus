@@ -24,6 +24,10 @@
         <label for="name">Management interface address</label>
         <input type="text" class="form-control" id="MIAddress" name="MIAddress" placeholder="Enter address"
           value="{{ .Settings.MIAddress }}">
+        <span class="help-block">172.17.0.1:2080 recommended with [172.17.0.1 2080] 
+          in Configuration - OpenVPN config. Update your server.conf file first, manually
+          or by using this WebUI!
+        </span>
       </div>
 
       <div class="form-group">
@@ -36,6 +40,7 @@
         <label for="name">Server Address (external)</label>
         <input type="text" class="form-control" id="ServerAddress" name="ServerAddress" placeholder="Enter server address"
           value="{{ .Settings.ServerAddress }}">
+        <span class="help-block">Static public IP address or DDNS hostname e.g. myhostname.duckdns.org</span>
       </div>
 
       <div class="form-group">

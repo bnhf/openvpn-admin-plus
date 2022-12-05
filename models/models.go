@@ -75,7 +75,7 @@ func createDefaultSettings() {
 		Profile:       "default",
 		MIAddress:     "openvpn:2080",
 		MINetwork:     "tcp",
-		ServerAddress: "127.0.0.1",
+		ServerAddress: "myopenvpnserver.duckdns.org",
 		OVConfigPath:  "/etc/openvpn/",
 	}
 	o := orm.NewOrm()
@@ -106,7 +106,7 @@ func createDefaultOVConfig() {
 			Dh:                  "none",
 			Keepalive:           "10 120",
 			IfconfigPoolPersist: "ipp.txt",
-			Management:          "0.0.0.0 2080",
+			Management:          "172.17.0.1 2080",
 			CCEncryption:        "easy-rsa/pki/ta.key",
 			Server:              "server-bridge 192.168.1.100 255.255.255.0 192.168.1.2 192.168.1.8",
 			Ca:                  "easy-rsa/pki/ca.crt",
