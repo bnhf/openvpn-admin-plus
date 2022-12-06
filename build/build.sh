@@ -18,5 +18,5 @@ cp -f ../$PKGFILE ./
 # docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -f build/Multi-arch.dockerfile -t bnhf/tap-development . --push
 
 # Single-arch (amd64) development build
-docker buildx build --platform linux/amd64 -f build/Multi-arch.dockerfile -t bnhf/tap-development . --push --no-cache 
+docker buildx build --platform linux/amd64 -f build/Multi-arch.dockerfile -t bnhf/tap-development . --push --no-cache
 rm -f $PKGFILE
