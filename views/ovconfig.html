@@ -59,20 +59,24 @@
         <label for="name">CA cert</label>
         <input type="text" class="form-control" name="Ca" id="Ca" placeholder="Enter CA certificate path"
           value="{{ .Settings.Ca }}">
+        <span id="helpBlock" class="help-block">Use pathname relative to /etc/openvpn/
+            typically easy-rsa/pki/ca.crt</span>
       </div>
 
       <div class="form-group">
         <label for="name">Server certificate</label>
         <input type="text" class="form-control" name="Cert" id="Cert" placeholder="Enter server certificate path"
           value="{{ .Settings.Cert }}">
-        <span id="helpBlock" class="help-block"></span>
+        <span id="helpBlock" class="help-block">Use pathname relative to /etc/openvpn/
+          e.g. easy-rsa/pki/issued/[PiVPN OpenVPN Server Name].crt</span>
       </div>
 
       <div class="form-group">
         <label for="name">Server key</label>
         <input type="text" class="form-control" name="Key" id="Key" placeholder="Enter server private key path"
           value="{{ .Settings.Key }}">
-        <span id="helpBlock" class="help-block"></span>
+        <span id="helpBlock" class="help-block">Use pathname relative to /etc/openvpn/
+          e.g. easy-rsa/pki/private/[PiVPN OpenVPN Server Name].key</span>
       </div>
 
       <div class="form-group">
@@ -134,7 +138,8 @@
         <input type="text" class="form-control" name="CCEncryption" id="CCEncryption" placeholder=""
           value="{{ .Settings.CCEncryption }}">
         <span id="helpBlock" class="help-block">Path for the key used
-            to encrypt the TLS Control Channel</span>
+            to encrypt the TLS Control Channel relative to /etc/openvpn/
+            typically easy-rsa/pki/ta.key </span>
       </div>
 
       <div class="form-group">
