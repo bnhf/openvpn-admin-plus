@@ -152,7 +152,7 @@ func RevokeCertificate(name string, serial string) error {
 			cmd := exec.Command("/bin/bash", "-c",
 				fmt.Sprintf(
 					//					"source %s &&"+
-					"%s/easyrsa revoke %s", rsaPath, name))
+					"%s/easyrsa --batch revoke %s", rsaPath, name))
 			cmd.Dir = models.GlobalCfg.OVConfigPath
 			output, err2 := cmd.CombinedOutput()
 			if err2 != nil {
