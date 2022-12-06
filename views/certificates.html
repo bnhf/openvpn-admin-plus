@@ -27,8 +27,8 @@
               <th>Revocation</th>
               <th>Serial</th>
               <th>Details</th>
-              <th>Revoke</th>
-              <th>Remove</th>
+              <th>Revoke Cert</th>
+              <th>Remove Cert</th>
             </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
                     <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
                       {{ .Details.Name }}.zip
                     </a>
-                    <a href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
+                    <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
                       {{ .Details.Name }}.ovpn
                     </a>
                   </td>
@@ -64,7 +64,7 @@
                   {{if eq .Revocation ""}}
                   <td>
                     <a class="btn btn-warning btn-sm" href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
-                      Revoke Certificate
+                      Revoke
                     </a>
                   </td>
                   {{else}}
@@ -75,7 +75,7 @@
                   {{else}}
                   <td>
                     <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
-                      Remove Certificate
+                      Remove
                     </a>
                   </td>
                   {{end}}

@@ -152,7 +152,7 @@ func RevokeCertificate(name string, serial string) error {
 			cmd := exec.Command("/bin/bash", "-c",
 				fmt.Sprintf(
 					//					"source %s &&"+
-					"%s/revoke-full %s", rsaPath, name))
+					"%s/easyrsa revoke %s", rsaPath, name))
 			cmd.Dir = models.GlobalCfg.OVConfigPath
 			output, err2 := cmd.CombinedOutput()
 			if err2 != nil {
@@ -181,11 +181,11 @@ func RemoveCertificate(name string, serial string) error {
 							beego.Error(err)
 							return err
 			    	}*/
-			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + serial + ".pem")
-			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".crt")
-			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".key")
-			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".csr")
-			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".conf")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/certs_by_serial/" + serial + ".pem")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/issued/" + name + ".crt")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/private/" + name + ".key")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".ovpn")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".conf")
 			lines, err := readLines(keyDb)
 			if err != nil {
 				beego.Error(err)
