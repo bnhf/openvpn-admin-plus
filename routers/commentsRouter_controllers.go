@@ -72,6 +72,24 @@ func init() {
 
     beego.GlobalControllerRouter["github.com/bnhf/pivpn-tap-web-ui/controllers:CertificatesController"] = append(beego.GlobalControllerRouter["github.com/bnhf/pivpn-tap-web-ui/controllers:CertificatesController"],
         beego.ControllerComments{
+            Method: "Remove",
+            Router: "/certificates/remove/:key/:serial",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["github.com/bnhf/pivpn-tap-web-ui/controllers:CertificatesController"] = append(beego.GlobalControllerRouter["github.com/bnhf/pivpn-tap-web-ui/controllers:CertificatesController"],
+        beego.ControllerComments{
+            Method: "Revoke",
+            Router: "/certificates/revoke/:key/:serial",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["github.com/bnhf/pivpn-tap-web-ui/controllers:CertificatesController"] = append(beego.GlobalControllerRouter["github.com/bnhf/pivpn-tap-web-ui/controllers:CertificatesController"],
+        beego.ControllerComments{
             Method: "DownloadSingleConfig",
             Router: "/certificates/single-config/:key",
             AllowHTTPMethods: []string{"get"},
