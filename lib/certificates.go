@@ -105,7 +105,7 @@ func CreateCertificate(name string) error {
 	//				"%s/easyrsa --batch build-client-full %s nopass", name, rsaPath, name))
 	//	cmd.Dir = models.GlobalCfg.OVConfigPath
 	//	output, err := cmd.CombinedOutput()
-	path := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+	path := models.GlobalCfg.OVConfigPath + "pki/index.txt"
 	certs, err := ReadCerts(path)
 	if err != nil {
 		//		beego.Debug(string(output))
@@ -124,7 +124,7 @@ func CreateCertificate(name string) error {
 			fmt.Sprintf(
 				//			    "source %s &&"+
 				"export KEY_NAME=%s &&"+
-					"%s/build-key --batch %s", name, rsaPath, name))
+					"%s/easyrsa --batch build-client-full %s", name, rsaPath, name))
 		cmd.Dir = models.GlobalCfg.OVConfigPath
 		output, err := cmd.CombinedOutput()
 		if err != nil {
@@ -138,7 +138,7 @@ func CreateCertificate(name string) error {
 }
 
 func RevokeCertificate(name string, serial string) error {
-	path := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+	path := models.GlobalCfg.OVConfigPath + "pki/index.txt"
 	certs, err := ReadCerts(path)
 	if err != nil {
 		beego.Error(err)
@@ -167,7 +167,7 @@ func RevokeCertificate(name string, serial string) error {
 }
 
 func RemoveCertificate(name string, serial string) error {
-	path := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+	path := models.GlobalCfg.OVConfigPath + "pki/index.txt"
 	certs, err := ReadCerts(path)
 	if err != nil {
 		beego.Error(err)
@@ -175,7 +175,7 @@ func RemoveCertificate(name string, serial string) error {
 	Dump(certs)
 	for _, v := range certs {
 		if v.Details.Name == name {
-			keyDb := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+			keyDb := models.GlobalCfg.OVConfigPath + "pki/index.txt"
 			/*file, err := os.Open(keyDb)
 			    	if err != nil {
 							beego.Error(err)
