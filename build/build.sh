@@ -15,6 +15,8 @@ cp -f ../$PKGFILE ./
 # docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -f build/Multi-arch.dockerfile -t bnhf/pivpn-tap-web-ui . --push
 
 # Multi-arch development build
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -f build/Multi-arch.dockerfile -t bnhf/tap-development . --push
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -f build/Multi-arch.dockerfile -t bnhf/tap-development . --push
 
+# Single-arch development build
+docker build -t bnhf/tap-development .
 rm -f $PKGFILE
