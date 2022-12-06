@@ -1,8 +1,10 @@
 package lib
 
 import (
+	"bufio"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"strings"
 	"time"
@@ -95,18 +97,140 @@ func trim(s string) string {
 
 func CreateCertificate(name string) error {
 	rsaPath := "/etc/openvpn/easy-rsa"
-	//	varsPath := models.GlobalCfg.OVConfigPath + "easy-rsa/vars"
-	cmd := exec.Command("/bin/bash", "-c",
-		fmt.Sprintf(
-			//			"source %s &&"+
-			"export KEY_NAME=%s &&"+
-				"%s/easyrsa --batch build-client-full %s nopass", name, rsaPath, name))
-	cmd.Dir = models.GlobalCfg.OVConfigPath
-	output, err := cmd.CombinedOutput()
+	//	//	varsPath := models.GlobalCfg.OVConfigPath + "easy-rsa/vars"
+	//	cmd := exec.Command("/bin/bash", "-c",
+	//		fmt.Sprintf(
+	//			//			"source %s &&"+
+	//			"export KEY_NAME=%s &&"+
+	//				"%s/easyrsa --batch build-client-full %s nopass", name, rsaPath, name))
+	//	cmd.Dir = models.GlobalCfg.OVConfigPath
+	//	output, err := cmd.CombinedOutput()
+	path := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+	certs, err := ReadCerts(path)
 	if err != nil {
-		beego.Debug(string(output))
+		//		beego.Debug(string(output))
 		beego.Error(err)
-		return err
+		//		return err
+	}
+	Dump(certs)
+	exists := false
+	for _, v := range certs {
+		if v.Details.Name == name {
+			exists = true
+		}
+	}
+	if exists == false {
+		cmd := exec.Command("/bin/bash", "-c",
+			fmt.Sprintf(
+				//			    "source %s &&"+
+				"export KEY_NAME=%s &&"+
+					"%s/build-key --batch %s", name, rsaPath, name))
+		cmd.Dir = models.GlobalCfg.OVConfigPath
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			beego.Debug(string(output))
+			beego.Error(err)
+			return err
+		}
+		return nil
 	}
 	return nil
+}
+
+func RevokeCertificate(name string, serial string) error {
+	path := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+	certs, err := ReadCerts(path)
+	if err != nil {
+		beego.Error(err)
+	}
+	Dump(certs)
+	for _, v := range certs {
+		if v.Details.Name == name {
+			rsaPath := "/etc/openvpn/easy-rsa/"
+			//			varsPath := models.GlobalCfg.OVConfigPath + "keys/vars"
+
+			cmd := exec.Command("/bin/bash", "-c",
+				fmt.Sprintf(
+					//					"source %s &&"+
+					"%s/revoke-full %s", rsaPath, name))
+			cmd.Dir = models.GlobalCfg.OVConfigPath
+			output, err2 := cmd.CombinedOutput()
+			if err2 != nil {
+				beego.Debug(string(output))
+				beego.Error(err2)
+				return err2
+			}
+			return nil
+		}
+	}
+	return nil //do nothing for now
+}
+
+func RemoveCertificate(name string, serial string) error {
+	path := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+	certs, err := ReadCerts(path)
+	if err != nil {
+		beego.Error(err)
+	}
+	Dump(certs)
+	for _, v := range certs {
+		if v.Details.Name == name {
+			keyDb := models.GlobalCfg.OVConfigPath + "keys/index.txt"
+			/*file, err := os.Open(keyDb)
+			    	if err != nil {
+							beego.Error(err)
+							return err
+			    	}*/
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + serial + ".pem")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".crt")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".key")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".csr")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "keys/" + name + ".conf")
+			lines, err := readLines(keyDb)
+			if err != nil {
+				beego.Error(err)
+				return err
+			}
+			newkeyDb := ""
+			for _, line := range lines {
+				if !checkSubstrings(line, name, "\t"+serial) {
+					newkeyDb += line + "\n"
+				}
+			}
+			err = ioutil.WriteFile(keyDb, []byte(newkeyDb), 0644)
+			if err != nil {
+				beego.Error(err)
+				return err
+			}
+			return nil
+		}
+	}
+	return nil //do nothing for now
+}
+
+func readLines(path string) ([]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	var lines []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	return lines, scanner.Err()
+}
+
+func checkSubstrings(str string, subs ...string) bool {
+	matches := 0
+	isCompleteMatch := true
+	for _, sub := range subs {
+		if strings.Contains(str, sub) {
+			matches += 1
+		} else {
+			isCompleteMatch = false
+		}
+	}
+	return isCompleteMatch
 }
