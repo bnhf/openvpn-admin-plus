@@ -36,6 +36,7 @@
             {{range .certificates}}
               {{ if ne .Details.CN "server"}}
               <tr>
+                  {{if eq .Revocation ""}}
                   <td>
                     <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
                       {{ .Details.Name }}.zip
@@ -44,6 +45,16 @@
                       {{ .Details.Name }}.ovpn
                     </a>
                   </td>
+                  {{else}}
+                  <td>
+                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
+                      {{ .Details.Name }}.zip
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
+                      {{ .Details.Name }}.ovpn
+                    </a>
+                  </td>
+                  {{end}}
                   <td>{{ .EntryType }}</td>
                   {{if eq .Revocation ""}}
                     <td><span class="label label-success">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
