@@ -35,7 +35,7 @@ Certificate generation and management is also available, and should be compatibl
 * log preview
 * modification of OpenVPN configuration file through web interface
 * this fork is especially designed to use an external version of OpenVPN configured for TAP (bridge) -- which is probably not possible via Docker
-* works with host-base PiVPN TUN servers now too!
+* works with host-based PiVPN TUN servers now too!
 
 ## Screenshots
 
