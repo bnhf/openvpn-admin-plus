@@ -24,7 +24,7 @@ auth {{ .Auth }}
 
 persist-key
 persist-tun
-crl-verify /etc/openvpn/crl.pem
+crl-verify /etc/openvpn/easy-rsa/pki/crl.pem
 
 # status /etc/openvpn/openvpn-status.log 20
 # status-version 3

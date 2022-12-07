@@ -27,7 +27,8 @@
               <th>Revocation</th>
               <th>Serial</th>
               <th>Details</th>
-              <th></th>
+              <th>Manage</th>
+              <th>Certificates</th>
             </tr>
             </thead>
             <tbody>
@@ -35,29 +36,62 @@
             {{range .certificates}}
               {{ if ne .Details.CN "server"}}
               <tr>
+                  {{if eq .Revocation ""}}
                   <td>
-                    <a href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
+                    <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
                       {{ .Details.Name }}.zip
                     </a>
-                    <a href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
+                    <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
                       {{ .Details.Name }}.ovpn
                     </a>
                   </td>
+                  {{else}}
+                  <td>
+                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
+                      {{ .Details.Name }}.zip
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
+                      {{ .Details.Name }}.ovpn
+                    </a>
+                  </td>
+                  {{end}}
                   <td>{{ .EntryType }}</td>
-                  <td>{{ dateformat .ExpirationT "2006-01-02 15:04"}}</td>
+                  {{if eq .Revocation ""}}
+                    <td><span class="label label-success">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
+                  {{else}}
+                    <td><span class="label label-danger">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
+                  {{end}}
                   {{if eq .Revocation ""}}
                     <td></td>
                   {{else}}
-                    <td>{{ dateformat .RevocationT "2006-01-02 15:04"}}</td>
+                  <td><span class="label label-danger">{{ dateformat .RevocationT "2006-01-02 15:04"}}</span></td>
                   {{end}}
                   <td>{{ .Serial }}</td>
                   <td>
-                    <span class="label label-warning">Country: {{ .Details.Country }}</span>
-                    <span class="label label-warning">CN: {{ .Details.Name }}</span>
-                    <span class="label label-warning">Email: {{ .Details.Email }}</span>
+                    <span class="label label-info">Country: {{ .Details.Country }}</span>
+                    <span class="label label-info">CN: {{ .Details.Name }}</span>
+                    <span class="label label-info">Email: {{ .Details.Email }}</span>
                   </td>
+                  {{if eq .Revocation ""}}
+                  <td>
+                    <a class="btn btn-warning btn-sm" href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
+                      Revoke
+                    </a>
+                  </td>
+                  {{else}}
+                  <td></td>
+                  {{end}}
+                  {{if eq .Revocation ""}}
+                  <td></td>
+                  {{else}}
+                  <td>
+                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
+                      Remove
+                    </a>
+                  </td>
+                  {{end}}
               </tr>
-              {{ end }}
+              {{ end }}            
             {{end}}
 
             </tbody>
@@ -104,4 +138,4 @@
     </div>
     </form>
     </div>
-{{end}}
+  {{end}}

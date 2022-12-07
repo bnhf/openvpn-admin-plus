@@ -73,6 +73,34 @@ func (c *CertificatesController) Download() {
 	}
 }
 
+// @router /certificates/revoke/:key/:serial [get]
+func (c *CertificatesController) Revoke() {
+	c.TplName = "certificates.html"
+	name := c.GetString(":key")
+	serial := c.GetString(":serial")
+	err := lib.RevokeCertificate(name, serial)
+	if err != nil {
+		beego.Error(err)
+		//flash.Error(err.Error())
+		//flash.Store(&c.Controller)
+	}
+	c.showCerts()
+}
+
+// @router /certificates/remove/:key/:serial [get]
+func (c *CertificatesController) Remove() {
+	c.TplName = "certificates.html"
+	name := c.GetString(":key")
+	serial := c.GetString(":serial")
+	err := lib.RemoveCertificate(name, serial)
+	if err != nil {
+		beego.Error(err)
+		//flash.Error(err.Error())
+		//flash.Store(&c.Controller)
+	}
+	c.showCerts()
+}
+
 func addFileToZip(zw *zip.Writer, path string) error {
 	header := &zip.FileHeader{
 		Name:         filepath.Base(path),
