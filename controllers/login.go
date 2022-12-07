@@ -55,7 +55,7 @@ func (c *LoginController) Logout() {
 }
 
 func Authenticate(login string, password string) (user *models.User, err error) {
-	msg := "invalid login or password."
+	msg := "Invalid login or password"
 	user = &models.User{Login: login}
 
 	if err := user.Read("Login"); err != nil {
