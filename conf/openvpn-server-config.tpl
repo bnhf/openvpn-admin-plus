@@ -12,8 +12,8 @@ ecdh-curve prime256v1
 topology subnet
 {{ .Server }}
 ifconfig-pool-persist {{ .IfconfigPoolPersist }}
-{{ .DNSServerOne }}"
-{{ .DNSServerTwo }}"
+{{ .DNSServerOne }}
+{{ .DNSServerTwo }}
 
 keepalive {{ .Keepalive }}
 remote-cert-tls client
