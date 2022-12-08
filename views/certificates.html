@@ -129,6 +129,10 @@
         <label for="name">Name</label>
         <input type="text" class="form-control" id="Name" name="Name">
       </div>
+      <div class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}" >
+        <label for="name">Passphrase</label>
+        <input type="text" class="form-control" id="passphrase" name="passphrase">
+      </div>
       <span class="help-block"> {{template "common/fvalid.html" field_error_message .validation "Name" }}</span>
     </div>
     <!-- /.box-body -->

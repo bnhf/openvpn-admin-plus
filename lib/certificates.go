@@ -95,8 +95,12 @@ func trim(s string) string {
 	return strings.Trim(strings.Trim(s, "\r\n"), "\n")
 }
 
-func CreateCertificate(name string) error {
+func CreateCertificate(name string, passphrase string) error {
 	rsaPath := "/etc/openvpn/easy-rsa"
+	pass := false
+	if passphrase != "" {
+		pass = true
+	}
 	//	//	varsPath := models.GlobalCfg.OVConfigPath + "easy-rsa/vars"
 	//	cmd := exec.Command("/bin/bash", "-c",
 	//		fmt.Sprintf(
@@ -119,12 +123,30 @@ func CreateCertificate(name string) error {
 			exists = true
 		}
 	}
-	if !exists {
+	if !exists && !pass {
 		cmd := exec.Command("/bin/bash", "-c",
 			fmt.Sprintf(
 				//			    "source %s &&"+
 				"export KEY_NAME=%s &&"+
-					"%s/easyrsa --batch build-client-full %s nopass", name, rsaPath, name))
+					"%s/easyrsa --batch build-client-full %s nopass",
+				name, rsaPath, name))
+		cmd.Dir = models.GlobalCfg.OVConfigPath
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			beego.Debug(string(output))
+			beego.Error(err)
+			return err
+		}
+		return nil
+	}
+	if !exists && pass {
+		cmd := exec.Command("/bin/bash", "-c",
+			fmt.Sprintf(
+				//			    "source %s &&"+
+				"export KEY_NAME=%s &&"+
+					"export PASSPHRASE=%s &&"+
+					"%s/easyrsa --passin=pass:$PASSPHRASE --pass out=pass:$PASSPHRASE build-client-full %s",
+				name, passphrase, rsaPath, name))
 		cmd.Dir = models.GlobalCfg.OVConfigPath
 		output, err := cmd.CombinedOutput()
 		if err != nil {
