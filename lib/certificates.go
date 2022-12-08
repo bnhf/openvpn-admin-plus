@@ -145,7 +145,7 @@ func CreateCertificate(name string, passphrase string) error {
 				//			    "source %s &&"+
 				"export KEY_NAME=%s &&"+
 					"export PASSPHRASE=%s &&"+
-					"%s/easyrsa --passin=pass:$PASSPHRASE --pass out=pass:$PASSPHRASE build-client-full %s",
+					"%s/easyrsa --passin=pass:$PASSPHRASE --passout=pass:$PASSPHRASE build-client-full %s",
 				name, passphrase, rsaPath, name))
 		cmd.Dir = models.GlobalCfg.OVConfigPath
 		output, err := cmd.CombinedOutput()
