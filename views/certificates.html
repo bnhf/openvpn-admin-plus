@@ -125,11 +125,11 @@
   {{template "common/alert.html" .}}
   <form role="form" action="{{urlfor "CertificatesController.Post"}}" method="post">
     <div class="box-body">
-      <div class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}" >
+      <div class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="Name" name="Name">
       </div>
-      <div class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}" >
+      <div class="form-group">
         <label for="name">Passphrase (Optional)</label>
         <input type="text" class="form-control" id="passphrase" name="passphrase">
       </div>

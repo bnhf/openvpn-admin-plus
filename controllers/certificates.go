@@ -18,7 +18,7 @@ import (
 
 type NewCertParams struct {
 	Name       string `form:"Name" valid:"Required;"`
-	Passphrase string `form:"Name"`
+	Passphrase string `form:"passphrase"`
 }
 
 type CertificatesController struct {
