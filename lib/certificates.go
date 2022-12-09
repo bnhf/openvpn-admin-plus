@@ -127,9 +127,9 @@ func CreateCertificate(name string, passphrase string) error {
 		cmd := exec.Command("/bin/bash", "-c",
 			fmt.Sprintf(
 				//			    "source %s &&"+
-				"export KEY_NAME=%s &&"+
-					"%s/easyrsa --batch build-client-full %s nopass",
-				name, rsaPath, name))
+				// "export KEY_NAME=%s &&"+
+				"%s/easyrsa --batch build-client-full %s nopass",
+				rsaPath, name))
 		cmd.Dir = models.GlobalCfg.OVConfigPath
 		output, err := cmd.CombinedOutput()
 		if err != nil {
@@ -143,10 +143,10 @@ func CreateCertificate(name string, passphrase string) error {
 		cmd := exec.Command("/bin/bash", "-c",
 			fmt.Sprintf(
 				//			    "source %s &&"+
-				"export KEY_NAME=%s &&"+
-					//	"export PASSPHRASE=%s &&"+
-					"%s/easyrsa --passout=pass:%s build-client-full %s",
-				name, passphrase, rsaPath, name))
+				// "export KEY_NAME=%s &&"+
+				//	"export PASSPHRASE=%s &&"+
+				"%s/easyrsa --passout=pass:%s build-client-full %s",
+				rsaPath, passphrase, name))
 		cmd.Dir = models.GlobalCfg.OVConfigPath
 		output, err := cmd.CombinedOutput()
 		if err != nil {
