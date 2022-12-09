@@ -97,12 +97,12 @@ func trim(s string) string {
 
 func CreateCertificate(name string, passphrase string) error {
 	rsaPath := models.GlobalCfg.OVConfigPath + "easy-rsa"
-	rsadbPath := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
+	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
 	pass := false
 	if passphrase != "" {
 		pass = true
 	}
-	certs, err := ReadCerts(rsadbPath)
+	certs, err := ReadCerts(rsaIndex)
 	if err != nil {
 		//		beego.Debug(string(output))
 		beego.Error(err)
@@ -148,8 +148,8 @@ func CreateCertificate(name string, passphrase string) error {
 
 func RevokeCertificate(name string, serial string) error {
 	rsaPath := models.GlobalCfg.OVConfigPath + "easy-rsa"
-	rsadbPath := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
-	certs, err := ReadCerts(rsadbPath)
+	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
+	certs, err := ReadCerts(rsaIndex)
 	if err != nil {
 		beego.Error(err)
 	}
@@ -176,8 +176,8 @@ func RevokeCertificate(name string, serial string) error {
 }
 
 func RemoveCertificate(name string, serial string) error {
-	rsadbPath := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
-	certs, err := ReadCerts(rsadbPath)
+	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
+	certs, err := ReadCerts(rsaIndex)
 	if err != nil {
 		beego.Error(err)
 	}
@@ -189,18 +189,18 @@ func RemoveCertificate(name string, serial string) error {
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/private/" + name + ".key")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".ovpn")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".conf")
-			lines, err := readLines(rsadbPath)
+			lines, err := readLines(rsaIndex)
 			if err != nil {
 				beego.Error(err)
 				return err
 			}
-			rsadbNew := ""
+			newrsaIndex := ""
 			for _, line := range lines {
 				if !checkSubstrings(line, name, "\t"+serial) {
-					rsadbNew += line + "\n"
+					newrsaIndex += line + "\n"
 				}
 			}
-			err = ioutil.WriteFile(rsadbPath, []byte(rsadbNew), 0644)
+			err = ioutil.WriteFile(rsaIndex, []byte(newrsaIndex), 0644)
 			if err != nil {
 				beego.Error(err)
 				return err
