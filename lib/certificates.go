@@ -96,6 +96,7 @@ func trim(s string) string {
 }
 
 func CreateCertificate(name string, passphrase string) error {
+	fmt.Println(string(passphrase))
 	rsaPath := "/etc/openvpn/easy-rsa"
 	pass := false
 	if passphrase != "" {
