@@ -19,3 +19,51 @@
   white-space: initial;
   display: block;
 }
+
+.alert {
+  padding: 10px !important;
+  margin-top: 20px;
+  margin-bottom: 5px !important;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu {
+  width: 230px !important;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header {
+  height: 175px !important;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+  color: #333 !important;
+}
+
+.password-control {
+  position: absolute;
+  top: 88px;
+  right: 45px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(../img/no-view.svg) 0 0 no-repeat;
+}
+
+.password-control.view {
+  background: url(../img/view.svg) 0 0 no-repeat;
+}
+
+.create-new-cert {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 20px 0;
+}
+
+.create-new-cert th {
+  padding-bottom: 5px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px !important;
+  }
+}

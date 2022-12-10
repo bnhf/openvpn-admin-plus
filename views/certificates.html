@@ -10,7 +10,7 @@
   <div class="col-md-12">
     <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">Clients certificates</h3>
+        <h3 class="box-title">Clients Certificates</h3>
 
       </div>
       <!-- /.box-header -->
@@ -26,7 +26,7 @@
               <th>Expiration</th>
               <th>Revocation</th>
               <th>Serial</th>
-              <th>Details</th>
+              <!-- <th>Details</th> -->
               <th>Manage</th>
               <th>Certificates</th>
             </tr>
@@ -55,7 +55,16 @@
                     </a>
                   </td>
                   {{end}}
-                  <td>{{ .EntryType }}</td>
+                  <!-- <td>{{ .EntryType }}</td> -->
+                  {{if eq .Revocation ""}}
+                  <td>
+		                <img src="/static/img/check-circle-fill.svg" width="16" height="16" alt="Valid">
+		              </td>
+		              {{else}}
+		              <td>
+		                <img src="/static/img/x-circle-fill.svg" width="16" height="16" alt="Revoked">
+		              </td>
+		              {{end}}
                   {{if eq .Revocation ""}}
                     <td><span class="label label-success">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
                   {{else}}
@@ -67,14 +76,14 @@
                   <td><span class="label label-danger">{{ dateformat .RevocationT "2006-01-02 15:04"}}</span></td>
                   {{end}}
                   <td>{{ .Serial }}</td>
-                  <td>
+                  <!-- <td>
                     <span class="label label-info">Country: {{ .Details.Country }}</span>
                     <span class="label label-info">CN: {{ .Details.Name }}</span>
                     <span class="label label-info">Email: {{ .Details.Email }}</span>
-                  </td>
+                  </td> -->
                   {{if eq .Revocation ""}}
                   <td>
-                    <a class="btn btn-warning btn-sm" href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
+                    <a href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
                       Revoke
                     </a>
                   </td>
@@ -85,7 +94,7 @@
                   <td></td>
                   {{else}}
                   <td>
-                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
+                    <a href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
                       Remove
                     </a>
                   </td>
@@ -118,21 +127,46 @@
 
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Create a new certificate</h3>
+    <h3 class="box-title">Create New Certificate</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
   {{template "common/alert.html" .}}
   <form role="form" action="{{urlfor "CertificatesController.Post"}}" method="post">
     <div class="box-body">
-      <div class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="Name" name="Name">
-      </div>
-      <div class="form-group">
-        <label for="name">Passphrase (Optional)</label>
-        <input type="text" class="form-control" id="passphrase" name="passphrase">
-      </div>
+      <table class="create-new-cert">
+        <thead>
+          <tr>
+            <th>
+              <label for="name">Name</label>
+            </th>
+            <th>
+              <label for="name">Passphrase (Optional)</label>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}">
+              <input type="text" class="form-control" placeholder="Enter name for new certificate" id="Name" name="Name">
+            </td>
+            <td class="form-group">
+              <input type="password" class="form-control" placeholder="Enter password for new private key" id="password-input" id="passphrase" name="passphrase">
+              <a href="#" class="password-control" title="Show or Hide Password"></a>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="form-group">
+              <span class="help-block">The name is used as the common name of the certificate<span>
+            </td>
+            <td class="form-group">
+              <span class="help-block">The passphrase is used to protect the private key</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <span class="help-block"> {{template "common/fvalid.html" field_error_message .validation "Name" }}</span>
     </div>
     <!-- /.box-body -->
