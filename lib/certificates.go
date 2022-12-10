@@ -187,6 +187,7 @@ func RemoveCertificate(name string, serial string) error {
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/certs_by_serial/" + serial + ".pem")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/issued/" + name + ".crt")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/private/" + name + ".key")
+			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/reqs/" + name + ".req")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".ovpn")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".conf")
 			lines, err := readLines(rsaIndex)
