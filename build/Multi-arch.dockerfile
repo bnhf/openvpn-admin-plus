@@ -4,7 +4,7 @@ WORKDIR /go/src/github.com/bnhf
 # Uncomment for a multi-arch buildx of the main branch
 # RUN git clone https://github.com/bnhf/pivpn-tap-web-ui
 # Uncomment for a multi-arch buildx of the develop branch
-RUN git clone -b develop --single-branch https://github.com/bnhf/pivpn-tap-web-ui
+RUN git clone -b develop-2 --single-branch https://github.com/bnhf/pivpn-tap-web-ui
 WORKDIR /go/src/github.com/bnhf/pivpn-tap-web-ui
 RUN go mod tidy && \
     bee pack -exr='^vendor|^data.db|^build|^README.md|^docs'

@@ -95,18 +95,14 @@ func trim(s string) string {
 	return strings.Trim(strings.Trim(s, "\r\n"), "\n")
 }
 
-func CreateCertificate(name string) error {
-	rsaPath := "/etc/openvpn/easy-rsa"
-	//	//	varsPath := models.GlobalCfg.OVConfigPath + "easy-rsa/vars"
-	//	cmd := exec.Command("/bin/bash", "-c",
-	//		fmt.Sprintf(
-	//			//			"source %s &&"+
-	//			"export KEY_NAME=%s &&"+
-	//				"%s/easyrsa --batch build-client-full %s nopass", name, rsaPath, name))
-	//	cmd.Dir = models.GlobalCfg.OVConfigPath
-	//	output, err := cmd.CombinedOutput()
-	path := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
-	certs, err := ReadCerts(path)
+func CreateCertificate(name string, passphrase string) error {
+	rsaPath := models.GlobalCfg.OVConfigPath + "easy-rsa"
+	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
+	pass := false
+	if passphrase != "" {
+		pass = true
+	}
+	certs, err := ReadCerts(rsaIndex)
 	if err != nil {
 		//		beego.Debug(string(output))
 		beego.Error(err)
@@ -119,12 +115,25 @@ func CreateCertificate(name string) error {
 			exists = true
 		}
 	}
-	if !exists {
+	if !exists && !pass {
 		cmd := exec.Command("/bin/bash", "-c",
 			fmt.Sprintf(
-				//			    "source %s &&"+
-				"export KEY_NAME=%s &&"+
-					"%s/easyrsa --batch build-client-full %s nopass", name, rsaPath, name))
+				"%s/easyrsa --batch build-client-full %s nopass",
+				rsaPath, name))
+		cmd.Dir = models.GlobalCfg.OVConfigPath
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			beego.Debug(string(output))
+			beego.Error(err)
+			return err
+		}
+		return nil
+	}
+	if !exists && pass {
+		cmd := exec.Command("/bin/bash", "-c",
+			fmt.Sprintf(
+				"%s/easyrsa --passout=pass:%s build-client-full %s",
+				rsaPath, passphrase, name))
 		cmd.Dir = models.GlobalCfg.OVConfigPath
 		output, err := cmd.CombinedOutput()
 		if err != nil {
@@ -138,20 +147,17 @@ func CreateCertificate(name string) error {
 }
 
 func RevokeCertificate(name string, serial string) error {
-	path := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
-	certs, err := ReadCerts(path)
+	rsaPath := models.GlobalCfg.OVConfigPath + "easy-rsa"
+	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
+	certs, err := ReadCerts(rsaIndex)
 	if err != nil {
 		beego.Error(err)
 	}
 	Dump(certs)
 	for _, v := range certs {
 		if v.Details.Name == name {
-			rsaPath := "/etc/openvpn/easy-rsa/"
-			//			varsPath := models.GlobalCfg.OVConfigPath + "keys/vars"
-
 			cmd := exec.Command("/bin/bash", "-c",
 				fmt.Sprintf(
-					//					"source %s &&"+
 					"%s/easyrsa --batch revoke %s &&"+
 						"%s/easyrsa gen-crl &&"+
 						"cp %s/pki/crl.pem %s/..",
@@ -166,41 +172,35 @@ func RevokeCertificate(name string, serial string) error {
 			return nil
 		}
 	}
-	return nil //do nothing for now
+	return nil
 }
 
 func RemoveCertificate(name string, serial string) error {
-	path := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
-	certs, err := ReadCerts(path)
+	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
+	certs, err := ReadCerts(rsaIndex)
 	if err != nil {
 		beego.Error(err)
 	}
 	Dump(certs)
 	for _, v := range certs {
 		if v.Details.Name == name {
-			keyDb := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
-			/*file, err := os.Open(keyDb)
-			    	if err != nil {
-							beego.Error(err)
-							return err
-			    	}*/
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/certs_by_serial/" + serial + ".pem")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/issued/" + name + ".crt")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/private/" + name + ".key")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".ovpn")
 			_ = os.Remove(models.GlobalCfg.OVConfigPath + "easy-rsa/pki/" + name + ".conf")
-			lines, err := readLines(keyDb)
+			lines, err := readLines(rsaIndex)
 			if err != nil {
 				beego.Error(err)
 				return err
 			}
-			newkeyDb := ""
+			newrsaIndex := ""
 			for _, line := range lines {
 				if !checkSubstrings(line, name, "\t"+serial) {
-					newkeyDb += line + "\n"
+					newrsaIndex += line + "\n"
 				}
 			}
-			err = ioutil.WriteFile(keyDb, []byte(newkeyDb), 0644)
+			err = ioutil.WriteFile(rsaIndex, []byte(newrsaIndex), 0644)
 			if err != nil {
 				beego.Error(err)
 				return err
@@ -208,7 +208,7 @@ func RemoveCertificate(name string, serial string) error {
 			return nil
 		}
 	}
-	return nil //do nothing for now
+	return nil
 }
 
 func readLines(path string) ([]string, error) {
