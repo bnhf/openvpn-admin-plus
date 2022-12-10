@@ -10,7 +10,7 @@
   <div class="col-md-12">
     <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">Clients certificates</h3>
+        <h3 class="box-title">Clients Certificates</h3>
 
       </div>
       <!-- /.box-header -->
@@ -26,7 +26,7 @@
               <th>Expiration</th>
               <th>Revocation</th>
               <th>Serial</th>
-              <th>Details</th>
+              <!-- <th>Details</th> -->
               <th>Manage</th>
               <th>Certificates</th>
             </tr>
@@ -55,7 +55,16 @@
                     </a>
                   </td>
                   {{end}}
-                  <td>{{ .EntryType }}</td>
+                  <!-- <td>{{ .EntryType }}</td> -->
+                  {{if eq .Revocation ""}}
+                  <td>
+		                <img src="/static/img/check-circle-fill.svg" width="16" height="16" alt="Valid">
+		              </td>
+		              {{else}}
+		              <td>
+		                <img src="/static/img/x-circle-fill.svg" width="16" height="16" alt="Revoked">
+		              </td>
+		              {{end}}
                   {{if eq .Revocation ""}}
                     <td><span class="label label-success">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
                   {{else}}
@@ -67,14 +76,14 @@
                   <td><span class="label label-danger">{{ dateformat .RevocationT "2006-01-02 15:04"}}</span></td>
                   {{end}}
                   <td>{{ .Serial }}</td>
-                  <td>
+                  <!-- <td>
                     <span class="label label-info">Country: {{ .Details.Country }}</span>
                     <span class="label label-info">CN: {{ .Details.Name }}</span>
                     <span class="label label-info">Email: {{ .Details.Email }}</span>
-                  </td>
+                  </td> -->
                   {{if eq .Revocation ""}}
                   <td>
-                    <a class="btn btn-warning btn-sm" href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
+                    <a href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
                       Revoke
                     </a>
                   </td>
@@ -85,7 +94,7 @@
                   <td></td>
                   {{else}}
                   <td>
-                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
+                    <a href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
                       Remove
                     </a>
                   </td>
@@ -118,7 +127,7 @@
 
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Create a new certificate</h3>
+    <h3 class="box-title">Create New Certificate</h3>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
