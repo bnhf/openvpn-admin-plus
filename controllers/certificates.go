@@ -86,6 +86,7 @@ func (c *CertificatesController) Revoke() {
 		//flash.Store(&c.Controller)
 	} else {
 		flash.Success("Certificate Revoked!")
+		flash.Store(&c.Controller)
 	}
 	c.showCerts()
 }
@@ -102,6 +103,7 @@ func (c *CertificatesController) Remove() {
 		//flash.Store(&c.Controller)
 	} else {
 		flash.Success("Certificate Removed!")
+		flash.Store(&c.Controller)
 	}
 	c.showCerts()
 }
