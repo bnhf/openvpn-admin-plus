@@ -54,6 +54,8 @@
 
 .create-new-cert {
   width: 100%;
+  table-layout: fixed;
+  box-sizing: border-box;
   border-collapse: separate;
   border-spacing: 20px 0;
 }
