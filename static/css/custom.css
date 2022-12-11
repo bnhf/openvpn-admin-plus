@@ -40,7 +40,7 @@
 
 .password-control {
   position: absolute;
-  top: 88px;
+  top: 83px;
   right: 45px;
   display: inline-block;
   width: 20px;
@@ -58,10 +58,6 @@
   box-sizing: border-box;
   border-collapse: separate;
   border-spacing: 20px 0;
-}
-
-.create-new-cert th {
-  padding-bottom: 5px;
 }
 
 .btn-group-sm>.btn,.btn-sm {
