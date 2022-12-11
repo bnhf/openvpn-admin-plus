@@ -85,7 +85,7 @@ func (c *CertificatesController) Revoke() {
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
 	} else {
-		flash.Warning("Certificate " + name + " Revoked!")
+		flash.Warning("Certificate for the name \"" + name + "\" revoked")
 		flash.Store(&c.Controller)
 	}
 	c.showCerts()
@@ -102,7 +102,7 @@ func (c *CertificatesController) Remove() {
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
 	} else {
-		flash.Error("Certificate " + name + " Removed!")
+		flash.Error("Certificate for the name \"" + name + "\" removed")
 		flash.Store(&c.Controller)
 	}
 	c.showCerts()
@@ -157,6 +157,7 @@ func (c *CertificatesController) Post() {
 	flash := beego.NewFlash()
 
 	cParams := NewCertParams{}
+	name := cParams.Name
 	if err := c.ParseForm(&cParams); err != nil {
 		beego.Error(err)
 		flash.Error(err.Error())
@@ -168,6 +169,9 @@ func (c *CertificatesController) Post() {
 			if err := lib.CreateCertificate(cParams.Name, cParams.Passphrase); err != nil {
 				beego.Error(err)
 				flash.Error(err.Error())
+				flash.Store(&c.Controller)
+			} else {
+				flash.Success("Certificate for the name \"" + name + "\" created")
 				flash.Store(&c.Controller)
 			}
 		}

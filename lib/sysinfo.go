@@ -37,6 +37,7 @@ func GetSystemInfo() SystemInfo {
 
 	s.CurrentTime = time.Now()
 
+	//	awk '/MemTotal:/ {print $2}' /proc/meminfo
 	mem := sigar.Mem{}
 	if err := mem.Get(); err == nil {
 		s.Memory = mem
@@ -57,3 +58,12 @@ func GetSystemInfo() SystemInfo {
 
 	return s
 }
+
+//    func GetContainerInfo() {
+//		out, err := exec.Command(
+//			"awk '/MemTotal:/ {print $2}' /proc/meminfo").Output()
+//		if err != nil {
+//			beego.Error(err)
+//		}
+//		fmt.Printf("Total memory = %s\n", out)
+//	}
