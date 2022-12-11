@@ -85,7 +85,7 @@ func (c *CertificatesController) Revoke() {
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
 	} else {
-		flash.Success("Certificate Revoked!")
+		flash.Warning("Certificate " + name + " Revoked!")
 		flash.Store(&c.Controller)
 	}
 	c.showCerts()
@@ -102,7 +102,7 @@ func (c *CertificatesController) Remove() {
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
 	} else {
-		flash.Success("Certificate Removed!")
+		flash.Error("Certificate " + name + " Removed!")
 		flash.Store(&c.Controller)
 	}
 	c.showCerts()
