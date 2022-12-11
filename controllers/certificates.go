@@ -157,7 +157,6 @@ func (c *CertificatesController) Post() {
 	flash := beego.NewFlash()
 
 	cParams := NewCertParams{}
-	name := cParams.Name
 	if err := c.ParseForm(&cParams); err != nil {
 		beego.Error(err)
 		flash.Error(err.Error())
@@ -171,7 +170,7 @@ func (c *CertificatesController) Post() {
 				flash.Error(err.Error())
 				flash.Store(&c.Controller)
 			} else {
-				flash.Success("Certificate for the name \"" + name + "\" created")
+				flash.Success("Certificate for the name \"" + cParams.Name + "\" created")
 				flash.Store(&c.Controller)
 			}
 		}
