@@ -85,9 +85,8 @@ func (c *CertificatesController) Revoke() {
 		beego.Error(err)
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
-	} else {
-		flash.Success("Certificate Revoked!")
 	}
+	flash.Success("Certificate Revoked!")
 	c.showCerts()
 }
 
@@ -102,9 +101,8 @@ func (c *CertificatesController) Remove() {
 		beego.Error(err)
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
-	} else {
-		flash.Success("Certificate Removed!")
 	}
+	flash.Success("Certificate Removed!")
 	c.showCerts()
 }
 
