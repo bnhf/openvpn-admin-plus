@@ -64,6 +64,10 @@
   padding-bottom: 5px;
 }
 
+.btn-group-sm>.btn,.btn-sm {
+  padding: 3px 6px !important;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 1170px !important;
