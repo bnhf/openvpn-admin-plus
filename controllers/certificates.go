@@ -77,6 +77,7 @@ func (c *CertificatesController) Download() {
 // @router /certificates/revoke/:key/:serial [get]
 func (c *CertificatesController) Revoke() {
 	c.TplName = "certificates.html"
+	flash := beego.NewFlash()
 	name := c.GetString(":key")
 	serial := c.GetString(":serial")
 	err := lib.RevokeCertificate(name, serial)
@@ -84,6 +85,8 @@ func (c *CertificatesController) Revoke() {
 		beego.Error(err)
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
+	} else {
+		flash.Success("Certificate Revoked!")
 	}
 	c.showCerts()
 }
@@ -91,6 +94,7 @@ func (c *CertificatesController) Revoke() {
 // @router /certificates/remove/:key/:serial [get]
 func (c *CertificatesController) Remove() {
 	c.TplName = "certificates.html"
+	flash := beego.NewFlash()
 	name := c.GetString(":key")
 	serial := c.GetString(":serial")
 	err := lib.RemoveCertificate(name, serial)
@@ -98,6 +102,8 @@ func (c *CertificatesController) Remove() {
 		beego.Error(err)
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
+	} else {
+		flash.Success("Certificate Removed!")
 	}
 	c.showCerts()
 }
