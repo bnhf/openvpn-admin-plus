@@ -80,13 +80,13 @@ func (c *CertificatesController) Revoke() {
 	flash := beego.NewFlash()
 	name := c.GetString(":key")
 	serial := c.GetString(":serial")
-	err := lib.RevokeCertificate(name, serial)
-	if err != nil {
+	if err := lib.RevokeCertificate(name, serial); err != nil {
 		beego.Error(err)
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
+	} else {
+		flash.Success("Certificate Revoked!")
 	}
-	flash.Success("Certificate Revoked!")
 	c.showCerts()
 }
 
@@ -96,13 +96,13 @@ func (c *CertificatesController) Remove() {
 	flash := beego.NewFlash()
 	name := c.GetString(":key")
 	serial := c.GetString(":serial")
-	err := lib.RemoveCertificate(name, serial)
-	if err != nil {
+	if err := lib.RemoveCertificate(name, serial); err != nil {
 		beego.Error(err)
 		//flash.Error(err.Error())
 		//flash.Store(&c.Controller)
+	} else {
+		flash.Success("Certificate Removed!")
 	}
-	flash.Success("Certificate Removed!")
 	c.showCerts()
 }
 
