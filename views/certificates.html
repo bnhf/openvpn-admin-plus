@@ -11,7 +11,6 @@
     <div class="box box-info">
       <div class="box-header with-border">
         <h3 class="box-title">Clients Certificates</h3>
-
       </div>
       <!-- /.box-header -->
 
@@ -36,56 +35,53 @@
             {{range .certificates}}
               {{ if ne .Details.CN "server"}}
               <tr>
-                  {{if eq .Revocation ""}}
                   <td>
-                    <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
-                      {{ .Details.Name }}.zip
-                    </a>
-                    <a class="btn btn-success btn-sm" href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
-                      {{ .Details.Name }}.ovpn
-                    </a>
+                    <a href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
+		      {{ .Details.Name }}.zip
+		    </a>
+                    <a href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
+		      {{ .Details.Name }}.ovpn
+		    </a>
                   </td>
-                  {{else}}
-                  <td>
-                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Download" ":key" .Details.Name}}">
-                      {{ .Details.Name }}.zip
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.DownloadSingleConfig" ":key" .Details.Name}}">
-                      {{ .Details.Name }}.ovpn
-                    </a>
-                  </td>
-                  {{end}}
                   <!-- <td>{{ .EntryType }}</td> -->
                   {{if eq .Revocation ""}}
                   <td>
-		                <img src="/static/img/check-circle-fill.svg" width="16" height="16" alt="Valid">
-		              </td>
-		              {{else}}
-		              <td>
-		                <img src="/static/img/x-circle-fill.svg" width="16" height="16" alt="Revoked">
-		              </td>
-		              {{end}}
+		    <img src="/static/img/check-circle-fill.svg" width="16" height="16" alt="Valid">
+		  </td>
+		  {{else}}
+		  <td>
+		    <img src="/static/img/x-circle-fill.svg" width="16" height="16" alt="Revoked">
+		  </td>
+		  {{end}}
                   {{if eq .Revocation ""}}
-                    <td><span class="label label-success">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
+                  <td>
+	            <span class="label label-success">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span>
+		  </td>
                   {{else}}
-                    <td><span class="label label-danger">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span></td>
+                  <td>
+                    <span class="label label-danger">{{ dateformat .ExpirationT "2006-01-02 15:04"}}</span>
+		  </td>
                   {{end}}
                   {{if eq .Revocation ""}}
-                    <td></td>
+                  <td></td>
                   {{else}}
-                  <td><span class="label label-danger">{{ dateformat .RevocationT "2006-01-02 15:04"}}</span></td>
+                  <td>
+		    <span class="label label-danger">{{ dateformat .RevocationT "2006-01-02 15:04"}}</span>
+		  </td>
                   {{end}}
                   <td>{{ .Serial }}</td>
-                  <!-- <td>
+                  <!--
+		  <td>
                     <span class="label label-info">Country: {{ .Details.Country }}</span>
                     <span class="label label-info">CN: {{ .Details.Name }}</span>
                     <span class="label label-info">Email: {{ .Details.Email }}</span>
-                  </td> -->
+                  </td>
+		  -->
                   {{if eq .Revocation ""}}
                   <td>
-                    <a href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
-                      Revoke
-                    </a>
+                    <a class="btn btn-warning btn-sm" href="{{urlfor "CertificatesController.Revoke" ":key" .Details.Name ":serial" .Serial}}">
+		      Revoke
+		    </a>
                   </td>
                   {{else}}
                   <td></td>
@@ -94,9 +90,9 @@
                   <td></td>
                   {{else}}
                   <td>
-                    <a href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
-                      Remove
-                    </a>
+        	    <a class="btn btn-danger btn-sm" href="{{urlfor "CertificatesController.Remove" ":key" .Details.Name ":serial" .Serial}}">
+		      Remove
+		    </a>
                   </td>
                   {{end}}
               </tr>
