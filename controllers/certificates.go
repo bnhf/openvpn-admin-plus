@@ -170,11 +170,7 @@ func (c *CertificatesController) Post() {
 				flash.Error(err.Error())
 				flash.Store(&c.Controller)
 			} else {
-				if err == cParams.Name {
-				flash.Error("Error! There is already a valid or invalid certificate for the name \"" + cParams.Name + "\"")
-				flash.Store(&c.Controller)
-		    } else {
-				flash.Error("Certificate for the name \"" + cParams.Name + "\" created")
+				flash.Success("Certificate for the name \"" + cParams.Name + "\" created")
 				flash.Store(&c.Controller)
 			}
 		}

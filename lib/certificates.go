@@ -113,9 +113,9 @@ func CreateCertificate(name string, passphrase string) error {
 	for _, v := range certs {
 		if v.Details.Name == name {
 			exists = true
-			return name
+			return err
 		}
-		return nil
+		return err
 	}
 	if !exists && !pass {
 		cmd := exec.Command("/bin/bash", "-c",
@@ -129,7 +129,7 @@ func CreateCertificate(name string, passphrase string) error {
 			beego.Error(err)
 			return err
 		}
-		return nil
+		return err
 	}
 	if !exists && pass {
 		cmd := exec.Command("/bin/bash", "-c",
@@ -141,11 +141,11 @@ func CreateCertificate(name string, passphrase string) error {
 		if err != nil {
 			beego.Debug(string(output))
 			beego.Error(err)
-			return nil
+			return err
 		}
-		return nil
+		return err
 	}
-	return nil
+	return err
 }
 
 func RevokeCertificate(name string, serial string) error {
