@@ -145,7 +145,7 @@ func CreateCertificate(name string, passphrase string) error {
 		}
 		return nil
 	}
-	return err
+	return nil
 }
 
 func RevokeCertificate(name string, serial string) error {
