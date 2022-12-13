@@ -129,7 +129,7 @@ func CreateCertificate(name string, passphrase string) error {
 			beego.Error(err)
 			return err
 		}
-		return nil
+		return err
 	}
 	if !exists && pass {
 		cmd := exec.Command("/bin/bash", "-c",
@@ -143,7 +143,7 @@ func CreateCertificate(name string, passphrase string) error {
 			beego.Error(err)
 			return err
 		}
-		return nil
+		return err
 	}
 	return err
 }
