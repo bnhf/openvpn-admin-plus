@@ -115,6 +115,7 @@ func CreateCertificate(name string, passphrase string) error {
 			exists = true
 			return err
 		}
+		return err
 	}
 	if !exists && !pass {
 		cmd := exec.Command("/bin/bash", "-c",
