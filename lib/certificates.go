@@ -113,6 +113,7 @@ func CreateCertificate(name string, passphrase string) error {
 	for _, v := range certs {
 		if v.Details.Name == name {
 			exists = true
+			return err
 		}
 	}
 	if !exists && !pass {
