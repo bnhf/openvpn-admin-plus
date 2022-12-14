@@ -64,6 +64,20 @@
   padding: 3px 6px !important;
 }
 
+.button-copy {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background-color: #fafafa;
+  vertical-align: middle;
+}
+
+.button-copy:hover {
+  background-color: #efefef;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 1170px !important;
