@@ -1,7 +1,7 @@
 {{ template "layout/base.html" . }}
 
 {{define "head"}}
-<title>OpenVPN - Settings</title>
+<title>OpenVPN - Certificates</title>
 {{end}}
 
 {{define "body"}}
@@ -51,7 +51,7 @@
 		  </td>
 		  {{else}}
 		  <td>
-		    <img src="/static/img/x-circle-fill.svg" width="16" height="16" alt="Revoked">
+		    <img src="/static/img/x-circle-fill.svg" width="16" height="16" alt="Invalid">
 		  </td>
 		  {{end}}
                   {{if eq .Revocation ""}}
@@ -108,14 +108,13 @@
       <!--else
           Fix your configuration
       end-->
-      <div class="box-footer clearfix">
-      </div>
+      <div class="box-footer clearfix"></div>
       <!--
       <div class="box-footer clearfix">
         <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
         <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
       </div>
-    -->
+      -->
       <!-- /.box-footer -->
     </div>
     <!-- /.box -->
@@ -145,10 +144,10 @@
         <tbody>
           <tr>
             <td class="form-group {{if field_error_exist .validation "Name" }}has-error{{end}}">
-              <input type="text" class="form-control" placeholder="Enter name for new certificate" id="Name" name="Name">
+              <input type="text" class="form-control" placeholder="Enter name" id="Name" name="Name">
             </td>
             <td class="form-group">
-              <input type="password" class="form-control" placeholder="Enter password for new private key" id="password-input" id="passphrase" name="passphrase">
+              <input type="password" class="form-control" placeholder="Enter password" id="password-input" id="passphrase" name="passphrase">
               <a href="#" class="password-control" title="Show or Hide Password"></a>
             </td>
           </tr>
@@ -156,10 +155,10 @@
         <tbody>
           <tr>
             <td class="form-group">
-              <span class="help-block">The name is used as the common name of the certificate<span>
+              <span class="help-block">Name is used as the common name of the certificate<span>
             </td>
             <td class="form-group">
-              <span class="help-block">The passphrase is used to protect the private key</span>
+              <span class="help-block">Passphrase is used to protect the private key</span>
             </td>
           </tr>
         </tbody>
