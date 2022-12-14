@@ -2,6 +2,7 @@ package lib
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -99,6 +100,7 @@ func CreateCertificate(name string, passphrase string) error {
 	rsaPath := models.GlobalCfg.OVConfigPath + "easy-rsa"
 	rsaIndex := models.GlobalCfg.OVConfigPath + "easy-rsa/pki/index.txt"
 	pass := false
+	newError := errors.New("Error! There is already a valid or invalid certificate for that name")
 	if passphrase != "" {
 		pass = true
 	}
@@ -143,7 +145,7 @@ func CreateCertificate(name string, passphrase string) error {
 		}
 		return nil
 	}
-	return nil
+	return newError
 }
 
 func RevokeCertificate(name string, serial string) error {
