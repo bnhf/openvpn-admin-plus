@@ -36,9 +36,9 @@ func AddFuncMaps() {
 	beego.AddFuncMap("printmb", func(i interface{}) string {
 		switch v := i.(type) {
 		case uint64:
-			return num2str(int64(i.(uint64)/1024/1024), '\u00A0')
+			return num2str(int64(i.(uint64)/1024), '\u00A0')
 		case int64:
-			return num2str(i.(int64)/1024/1024, '\u00A0')
+			return num2str(i.(int64)/1024, '\u00A0')
 		default:
 			beego.Error("Unknown type:", v)
 		}

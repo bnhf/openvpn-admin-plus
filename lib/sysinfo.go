@@ -96,7 +96,7 @@ func GetSystemInfo() SystemInfo {
 			}
 		}
 	}
-	s.MemUsed = (s.MemAvail - s.MemFree)
+	s.MemUsed = (s.MemTotal - s.MemAvail)
 	s.SwapUsed = (s.SwapTotal - s.SwapFree)
 
 	return s

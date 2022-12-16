@@ -106,7 +106,7 @@
         <span class="progress-number">
           <b>{{ printmb .sysinfo.MemUsed }}</b>
           /
-          {{ printmb .sysinfo.MemTotal }} GB
+          {{ printmb .sysinfo.MemTotal }} MB
           - {{percent .sysinfo.MemUsed .sysinfo.MemTotal}}%
         </span>
         <div class="progress sm">
@@ -122,7 +122,7 @@
         <span class="progress-number">
           <b>{{ printmb .sysinfo.Swap.Used }}</b>
           /
-          {{ printmb .sysinfo.SwapTotal }} GB
+          {{ printmb .sysinfo.SwapTotal }} MB
           - {{percent .sysinfo.SwapUsed .sysinfo.SwapTotal}}%
         </span>
 
