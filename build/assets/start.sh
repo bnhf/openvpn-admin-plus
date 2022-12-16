@@ -38,14 +38,14 @@ if [ ! -z $HTTPSCERT ]; then
   sed -i 's/HTTPSCertFile=/HTTPSCertFile='"$HTTPSCERT"'/g' conf/app.conf
   echo "HTTPS Certificate path set to: \"$HTTPSCERT\""
 else
-  sed -i 's/HTTPSCertFile=/HTTPSCertFile=/etc/openvpn/easy-rsa/pki/issued/'"$PIVPNSERVER"'.crt /g' conf/app.conf
+  sed -i 's/HTTPSCertFile=/HTTPSCertFile=\/etc\/openvpn\/easy-rsa\/pki\/issued\/'"$PIVPNSERVER"'.crt /g' conf/app.conf
 fi
 
 if [ ! -z $HTTPSKEY ]; then
   sed -i 's/HTTPSKeyFile=/HTTPSKeyFile='"$HTTPSKEY"'/g' conf/app.conf
   echo "HTTPS key path set to: \"$HTTPSKEY\""
 else
-  sed -i 's/HTTPSKeyFile=/HTTPSKeyFile=/etc/openvpn/easy-rsa/pki/private/'"$PIVPNSERVER"'.key /g' conf/app.conf
+  sed -i 's/HTTPSKeyFile=/HTTPSKeyFile=\/etc\/openvpn\/easy-rsa\/pki\/private\/'"$PIVPNSERVER"'.key /g' conf/app.conf
 fi
 
 mkdir -p db
