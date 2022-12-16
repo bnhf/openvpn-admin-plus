@@ -23,6 +23,31 @@ export PIVPN_SERVER=$(awk -F= '/server/ {print $2}' \
 echo "PiVPN Server set to" $PIVPN_SERVER
 cd /opt/openvpn-gui-tap
 echo "Working directory set to" $PWD
+
+if [ ! -z $ENABLEHTTPS ]; then
+  sed -i 's/EnableHTTPS=false/EnableHTTPS=true/g' conf/app.conf
+  echo "HTTPS enabled"
+fi
+
+if [ ! -z $HTTPSPORT ]; then
+  sed -i 's/HTTPSPort=8443/HTTPSPort='"$HTTPSPort"'/g' conf/app.conf
+  echo "HTTPS port set to: \"$HTTPSPORT\""
+fi
+
+if [ ! -z $HTTPSCERT ]; then
+  sed -i 's/HTTPSCertFile=/HTTPSCertFile='"$HTTPSCERT"'/g' conf/app.conf
+  echo "HTTPS Certificate path set to: \"$HTTPSCERT\""
+else
+  sed -i 's/HTTPSCertFile=/HTTPSCertFile=/etc/openvpn/easy-rsa/pki/issued/'"$PIVPNSERVER"'.crt /g' conf/app.conf
+fi
+
+if [ ! -z $HTTPSKEY ]; then
+  sed -i 's/HTTPSKeyFile=/HTTPSKeyFile='"$HTTPSKEY"'/g' conf/app.conf
+  echo "HTTPS key path set to: \"$HTTPSKEY\""
+else
+  sed -i 's/HTTPSKeyFile=/HTTPSKeyFile=/etc/openvpn/easy-rsa/pki/private/'"$PIVPNSERVER"'.key /g' conf/app.conf
+fi
+
 mkdir -p db
 echo "Starting!"
 ./pivpn-tap-web-ui
