@@ -104,14 +104,14 @@
       <div class="progress-group">
         <span class="progress-text">Memory</span>
         <span class="progress-number">
-          <b>{{ printmb .sysinfo.Memory.Used }}</b>
+          <b>{{ printmb .sysinfo.MemUsed }}</b>
           /
-          {{ printmb .sysinfo.Memory.Total }} MB
-          - {{percent .sysinfo.Memory.Used .sysinfo.Memory.Total}}%
+          {{ printmb .sysinfo.MemTotal }} GB
+          - {{percent .sysinfo.MemUsed .sysinfo.MemTotal}}%
         </span>
         <div class="progress sm">
           <div class="progress-bar progress-bar-aqua"
-            style="width: {{percent .sysinfo.Memory.Used .sysinfo.Memory.Total}}%"></div>
+            style="width: {{percent .sysinfo.MemUsed .sysinfo.MemTotal}}%"></div>
         </div>
       </div>
     </div>
@@ -122,13 +122,13 @@
         <span class="progress-number">
           <b>{{ printmb .sysinfo.Swap.Used }}</b>
           /
-          {{ printmb .sysinfo.Swap.Total }} MB
-          - {{percent .sysinfo.Swap.Used .sysinfo.Swap.Total}}%
+          {{ printmb .sysinfo.SwapTotal }} GB
+          - {{percent .sysinfo.SwapUsed .sysinfo.SwapTotal}}%
         </span>
 
         <div class="progress sm">
           <div class="progress-bar progress-bar-red"
-            style="width: {{percent .sysinfo.Swap.Used .sysinfo.Swap.Total}}%"></div>
+            style="width: {{percent .sysinfo.SwapUsed .sysinfo.SwapTotal}}%"></div>
         </div>
       </div>
     </div>
