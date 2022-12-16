@@ -30,7 +30,7 @@ if [ ! -z $ENABLEHTTPS ]; then
 fi
 
 if [ ! -z $HTTPSPORT ]; then
-  sed -i 's/HTTPSPort=8443/HTTPSPort='"$HTTPSPort"'/g' conf/app.conf
+  sed -i 's/HTTPSPort=8443/HTTPSPort='"$HTTPSPORT"'/g' conf/app.conf
   echo "HTTPS port set to: \"$HTTPSPORT\""
 fi
 
