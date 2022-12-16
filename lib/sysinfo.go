@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/astaxie/beego"
 	sigar "github.com/cloudfoundry/gosigar"
 )
 
@@ -70,7 +71,8 @@ func GetSystemInfo() SystemInfo {
 	for _, memLabel := range memValues {
 		memInfo, err := os.Open("/proc/meminfo")
 		if err != nil {
-			panic(err)
+			beego.Debug(string("proc/meminfo not found"))
+			beego.Error(err)
 		}
 		defer memInfo.Close()
 		b := bufio.NewScanner(memInfo)

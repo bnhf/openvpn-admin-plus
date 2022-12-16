@@ -120,7 +120,7 @@
       <div class="progress-group">
         <span class="progress-text">Swap</span>
         <span class="progress-number">
-          <b>{{ printmb .sysinfo.Swap.Used }}</b>
+          <b>{{ printmb .sysinfo.SwapUsed }}</b>
           /
           {{ printmb .sysinfo.SwapTotal }} MB
           - {{percent .sysinfo.SwapUsed .sysinfo.SwapTotal}}%
