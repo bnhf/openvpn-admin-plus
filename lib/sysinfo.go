@@ -66,6 +66,7 @@ func GetSystemInfo() SystemInfo {
 	s.Arch = runtime.GOARCH
 	s.Os = runtime.GOOS
 
+	// Array with For loop to read /proc/meminfo to replace bogus gosigar memory and swap data
 	memValues := []string{"MemTotal", "MemFree", "MemAvailable", "SwapTotal", "SwapFree"}
 
 	for _, memLabel := range memValues {

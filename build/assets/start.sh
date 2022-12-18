@@ -25,27 +25,29 @@ cd /opt/openvpn-gui-tap
 echo "Working directory set to" $PWD
 
 if [ ! -z $ENABLEHTTPS ]; then
-  sed -i 's/EnableHTTPS=false/EnableHTTPS=true/g' conf/app.conf
+  sed -i '/EnableHTTPS=/s/.*/EnableHTTPS'"$ENABLEHTTPS"'/' conf/app.conf
   echo "HTTPS enabled"
 fi
 
 if [ ! -z $HTTPSPORT ]; then
-  sed -i 's/HTTPSPort=8443/HTTPSPort='"$HTTPSPORT"'/g' conf/app.conf
+  sed -i '/HTTPSPort=/s/.*/HTTPSPort='"$HTTPSPORT"'/' conf/app.conf
   echo "HTTPS port set to: \"$HTTPSPORT\""
 fi
 
 if [ ! -z $HTTPSCERT ]; then
-  sed -i 's/HTTPSCertFile=/HTTPSCertFile='"$HTTPSCERT"'/g' conf/app.conf
+  sed -i '/HTTPSCertFile=/s/.*/HTTPSCertFile='"$HTTPSCERT"'/' conf/app.conf
   echo "HTTPS Certificate path set to: \"$HTTPSCERT\""
 else
-  sed -i 's/HTTPSCertFile=/HTTPSCertFile=\/etc\/openvpn\/easy-rsa\/pki\/issued\/'"$PIVPN_SERVER"'.crt /g' conf/app.conf
+  sed -i '/HTTPSCertFile=/s/.*/HTTPSCertFile=\/etc\/openvpn\/easy-rsa\/pki\/issued\/'"$PIVPN_SERVER"'.crt/' conf/app.conf
+  echo "HTTPS Certificate path set to default: \"$HTTPSCERT\""
 fi
 
 if [ ! -z $HTTPSKEY ]; then
-  sed -i 's/HTTPSKeyFile=/HTTPSKeyFile='"$HTTPSKEY"'/g' conf/app.conf
+  sed -i '/HTTPSKeyFile=/s/.*/HTTPSKeyFile='"$HTTPSKEY"'/' conf/app.conf
   echo "HTTPS key path set to: \"$HTTPSKEY\""
 else
-  sed -i 's/HTTPSKeyFile=/HTTPSKeyFile=\/etc\/openvpn\/easy-rsa\/pki\/private\/'"$PIVPN_SERVER"'.key /g' conf/app.conf
+  sed -i '/HTTPSKeyFile=/s/.*/HTTPSKeyFile=\/etc\/openvpn\/easy-rsa\/pki\/private\/'"$PIVPN_SERVER"'.key/' conf/app.conf
+  echo "HTTPS key path set to default: \"$HTTPSKEY\""
 fi
 
 mkdir -p db
