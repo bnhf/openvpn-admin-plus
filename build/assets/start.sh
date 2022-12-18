@@ -25,8 +25,8 @@ cd /opt/openvpn-gui-tap
 echo "Working directory set to" $PWD
 
 if [ ! -z $ENABLEHTTPS ]; then
-  sed -i '/EnableHTTPS=/s/.*/EnableHTTPS'"$ENABLEHTTPS"'/' conf/app.conf
-  echo "HTTPS enabled"
+  sed -i '/EnableHTTPS=/s/.*/EnableHTTPS='"$ENABLEHTTPS"'/' conf/app.conf
+  echo "HTTPS enabled set to \"$ENABLEHTTPS\""
 fi
 
 if [ ! -z $HTTPSPORT ]; then
