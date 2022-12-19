@@ -21,7 +21,7 @@ COPY --from=0  /go/src/github.com/bnhf/pivpn-tap-web-ui/build/assets/vars.templa
 
 COPY --from=0 /go/src/github.com/bnhf/pivpn-tap-web-ui/pivpn-tap-web-ui.tar.gz /opt/openvpn-gui-tap/
 RUN tar -zxf /opt/openvpn-gui-tap/pivpn-tap-web-ui.tar.gz --directory /opt/openvpn-gui-tap/
-RUN rm -f /opt/openvpn-gui-tap/data.db /opt/openvpn-gui-tap/pivpn-tap-web-ui-tar.gz
+RUN rm -f /opt/openvpn-gui-tap/db/data.db /opt/openvpn-gui-tap/pivpn-tap-web-ui.tar.gz
 COPY --from=0 /go/src/github.com/bnhf/pivpn-tap-web-ui/build/assets/app.conf /opt/openvpn-gui-tap/conf/app.conf
 
 CMD /opt/start.sh
