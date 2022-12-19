@@ -35,19 +35,19 @@ if [ ! -z $HTTPSPORT ]; then
 fi
 
 if [ ! -z $HTTPSCERT ]; then
-  sed -i '/HTTPSCertFile=/s/.*/HTTPSCertFile='"$HTTPSCERT"'/' conf/app.conf
+  sed -i 's|.*HTTPSCertFile=.*|HTTPSCertFile='"$HTTPSCERT"'|' conf/app.conf
   echo "HTTPS Certificate path set to: \"$HTTPSCERT\""
 else
   sed -i '/HTTPSCertFile=/s/.*/HTTPSCertFile=\/etc\/openvpn\/easy-rsa\/pki\/issued\/'"$PIVPN_SERVER"'.crt/' conf/app.conf
-  echo "HTTPS Certificate path set to default: \"$HTTPSCERT\""
+  echo "HTTPS Certificate set to default: \"$PIVPN_SERVER\".crt"
 fi
 
 if [ ! -z $HTTPSKEY ]; then
-  sed -i '/HTTPSKeyFile=/s/.*/HTTPSKeyFile='"$HTTPSKEY"'/' conf/app.conf
+  sed -i 's|.*HTTPSKeyFile=.*|HTTPSKeyFile='"$HTTPSKEY"'|' conf/app.conf
   echo "HTTPS key path set to: \"$HTTPSKEY\""
 else
   sed -i '/HTTPSKeyFile=/s/.*/HTTPSKeyFile=\/etc\/openvpn\/easy-rsa\/pki\/private\/'"$PIVPN_SERVER"'.key/' conf/app.conf
-  echo "HTTPS key path set to default: \"$HTTPSKEY\""
+  echo "HTTPS key set to default: \"$PIVPN_SERVER\".key"
 fi
 
 mkdir -p db
