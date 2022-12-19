@@ -34,6 +34,7 @@
         <label for="name">Management Interface Protocol</label>
         <input type="text" class="form-control" id="MINetwork" name="MINetwork" placeholder="Enter interface protocol"
           value="{{ .Settings.MINetwork }}">
+        <span class="help-block">Protocol for accessing the OpenVPN Management Interface</span>
       </div>
 
       <div class="form-group">
@@ -47,6 +48,7 @@
         <label for="name">ConfigPath</label>
         <input type="text" class="form-control" id="OVConfigPath" name="OVConfigPath" placeholder="Enter config path"
           value="{{ .Settings.OVConfigPath }}">
+        <span class="help-block">Full path to the OpenVPN installation directory</span>
       </div>
 
       {{ .xsrfdata }}
