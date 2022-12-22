@@ -44,6 +44,17 @@ func AddFuncMaps() {
 		}
 		return "Mapping error"
 	})
+	beego.AddFuncMap("printmb_net", func(i interface{}) string {
+		switch v := i.(type) {
+		case uint64:
+			return num2str(int64(i.(uint64)/1024/1024), '\u00A0')
+		case int64:
+			return num2str(i.(int64)/1024/1024, '\u00A0')
+		default:
+			beego.Error("Unknown type:", v)
+		}
+		return "Mapping error"
+	})
 	beego.AddFuncMap("printmbold", func(i uint64) string {
 		return num2str(int64(i/1024/1024), ' ')
 	})
