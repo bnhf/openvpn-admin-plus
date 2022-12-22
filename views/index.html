@@ -18,10 +18,10 @@
             Clients count: <span class="info-box-number2">{{ .ovstats.NClients }}</span>
           </span>
           <span class="info-box-text">
-            In: <span class="info-box-number2">{{ printmb_net .ovstats.BytesIn }} MB</span>
+            In: <span class="info-box-number2">{{ printNetServer .ovstats.BytesIn }} MB</span>
           </span>
           <span class="info-box-text">
-            Out: <span class="info-box-number2">{{ printmb_net .ovstats.BytesOut }} MB </span>
+            Out: <span class="info-box-number2">{{ printNetServer .ovstats.BytesOut }} MB </span>
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -104,9 +104,9 @@
       <div class="progress-group">
         <span class="progress-text">Memory</span>
         <span class="progress-number">
-          <b>{{ printmb .sysinfo.MemUsed }}</b>
+          <b>{{ printMemory .sysinfo.MemUsed }}</b>
           /
-          {{ printmb .sysinfo.MemTotal }} MB
+          {{ printMemory .sysinfo.MemTotal }} MB
           - {{percent .sysinfo.MemUsed .sysinfo.MemTotal}}%
         </span>
         <div class="progress sm">
@@ -120,9 +120,9 @@
       <div class="progress-group">
         <span class="progress-text">Swap</span>
         <span class="progress-number">
-          <b>{{ printmb .sysinfo.SwapUsed }}</b>
+          <b>{{ printMemory .sysinfo.SwapUsed }}</b>
           /
-          {{ printmb .sysinfo.SwapTotal }} MB
+          {{ printMemory .sysinfo.SwapTotal }} MB
           - {{percent .sysinfo.SwapUsed .sysinfo.SwapTotal}}%
         </span>
 
@@ -174,10 +174,10 @@
                   </button>
                 </td>
                 <td align="right" style="padding-right:20px">
-                    {{printkb .BytesReceived}}
+                    {{printNetClient .BytesReceived}}
                 </td>
                 <td align="right" style="padding-right:20px">
-                    {{printkb .BytesSent}}
+                    {{printNetClient .BytesSent}}
                 </td>
                 <td>{{.ConnectedSince}}</td>
                 <td>
