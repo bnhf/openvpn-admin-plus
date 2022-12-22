@@ -22,7 +22,7 @@ func AddFuncMaps() {
 		}
 		return false
 	})
-	beego.AddFuncMap("printkb", func(i interface{}) string {
+	beego.AddFuncMap("printMemory", func(i interface{}) string {
 		switch v := i.(type) {
 		case uint64:
 			return num2str(int64(i.(uint64)/1024), '\u00A0')
@@ -33,18 +33,7 @@ func AddFuncMaps() {
 		}
 		return "Mapping error"
 	})
-	beego.AddFuncMap("printmb", func(i interface{}) string {
-		switch v := i.(type) {
-		case uint64:
-			return num2str(int64(i.(uint64)/1024), '\u00A0')
-		case int64:
-			return num2str(i.(int64)/1024, '\u00A0')
-		default:
-			beego.Error("Unknown type:", v)
-		}
-		return "Mapping error"
-	})
-	beego.AddFuncMap("printmb_net", func(i interface{}) string {
+	beego.AddFuncMap("printNetServer", func(i interface{}) string {
 		switch v := i.(type) {
 		case uint64:
 			return num2str(int64(i.(uint64)/1024/1024), '\u00A0')
@@ -55,12 +44,23 @@ func AddFuncMaps() {
 		}
 		return "Mapping error"
 	})
-	beego.AddFuncMap("printmbold", func(i uint64) string {
-		return num2str(int64(i/1024/1024), ' ')
+	beego.AddFuncMap("printNetClient", func(i interface{}) string {
+		switch v := i.(type) {
+		case uint64:
+			return num2str(int64(i.(uint64)/1024), '\u00A0')
+		case int64:
+			return num2str(i.(int64)/1024, '\u00A0')
+		default:
+			beego.Error("Unknown type:", v)
+		}
+		return "Mapping error"
 	})
-	beego.AddFuncMap("printgb", func(i uint64) string {
-		return num2str(int64(i/1024/1024/1024), ' ')
-	})
+	// beego.AddFuncMap("printmbold", func(i uint64) string {
+	// 	return num2str(int64(i/1024/1024), ' ')
+	// })
+	// beego.AddFuncMap("printgb", func(i uint64) string {
+	// 	return num2str(int64(i/1024/1024/1024), ' ')
+	// })
 	beego.AddFuncMap("percent", func(x, y interface{}) string {
 		beego.Notice("Percent", x, y)
 		zValue := "0"
