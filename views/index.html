@@ -18,10 +18,10 @@
             Clients count: <span class="info-box-number2">{{ .ovstats.NClients }}</span>
           </span>
           <span class="info-box-text">
-            In: <span class="info-box-number2">{{ printmb .ovstats.BytesIn }} MB</span>
+            In: <span class="info-box-number2">{{ printmb_net .ovstats.BytesIn }} MB</span>
           </span>
           <span class="info-box-text">
-            Out: <span class="info-box-number2">{{ printmb .ovstats.BytesOut }} MB </span>
+            Out: <span class="info-box-number2">{{ printmb_net .ovstats.BytesOut }} MB </span>
           </span>
         </div>
         <!-- /.info-box-content -->
