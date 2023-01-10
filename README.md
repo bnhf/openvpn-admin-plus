@@ -39,10 +39,9 @@ Certificate generation and management is also available, and should be compatibl
 
 ## Screenshots
 
-![Screenshot 2022-02-26 113330](https://user-images.githubusercontent.com/41088895/155858411-f0413188-2481-473a-891b-4e4305e3e515.png)
+![screenshot-nuc10-pc2 localdomain-2023 01 10-14_51_43](https://user-images.githubusercontent.com/41088895/211678711-b41de1c8-590f-45c0-9048-091ed1265211.png)
 
-![screenshot-raspberrypi5_8080-2022 02 26-14_10_25](https://user-images.githubusercontent.com/41088895/155859338-b7ca2743-b702-4eff-a2d5-31144d4a1be8.png)
-
+![screenshot-nuc10-pc2 localdomain_8080-2023 01 10-15_11_54](https://user-images.githubusercontent.com/41088895/211678760-ed8a8425-21db-4f28-b6f0-51078450d2d8.png)
 
 ![Screenshot 2022-02-26 113707](https://user-images.githubusercontent.com/41088895/155858443-581b9206-327b-4df3-ac14-cd310cae768e.png)
 
