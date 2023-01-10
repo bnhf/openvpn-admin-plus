@@ -6,15 +6,15 @@
 
 ## Status
 
-![Screenshot 2022-02-26 113256](https://user-images.githubusercontent.com/41088895/155858979-3055c518-4df8-4c10-bfaf-43f8543a7248.png)
+![screenshot-nuc10-pc2 localdomain_8080-2023 01 10-15_31_48](https://user-images.githubusercontent.com/41088895/211679914-864df7f4-c39b-4d19-9361-7ad41cf91c42.png)
 
 ## Certificates
 
-![Screenshot 2022-02-26 113707](https://user-images.githubusercontent.com/41088895/155858989-e5f6b5ab-b231-48dc-bc7c-d26e7b988e18.png)
+![screenshot-nuc10-pc2 localdomain-2023 01 10-14_45_55](https://user-images.githubusercontent.com/41088895/211680025-6055cb61-69bd-4daf-acc4-1f2d862308a6.png)
 
 ## OpenVPN config
 
-![screenshot-raspberrypi5_8080-2022 02 26-13_18_24](https://user-images.githubusercontent.com/41088895/155859029-b1e363c5-7b2a-462a-9847-4d77a26cd518.png)
+![screenshot-nuc10-pc2 localdomain_8080-2023 01 10-15_11_54](https://user-images.githubusercontent.com/41088895/211680104-2f726670-d6ee-48d8-b428-f83b1ad0e9e4.png)
 
 ## Portainer Stacks example amd64
 
