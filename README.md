@@ -43,7 +43,7 @@ Certificate generation and management is also available, and should be compatibl
 
 ![screenshot-nuc10-pc2 localdomain_8080-2023 01 10-15_11_54](https://user-images.githubusercontent.com/41088895/211678760-ed8a8425-21db-4f28-b6f0-51078450d2d8.png)
 
-![Screenshot 2022-02-26 113707](https://user-images.githubusercontent.com/41088895/155858443-581b9206-327b-4df3-ac14-cd310cae768e.png)
+![screenshot-nuc10-pc2 localdomain-2023 01 10-14_45_55](https://user-images.githubusercontent.com/41088895/211678922-c107f5d8-b642-40f3-8f5a-ae3a2cd6d662.png)
 
 ![Screenshot 2022-02-26 113822](https://user-images.githubusercontent.com/41088895/155858448-cced00d9-b931-4e85-a77f-f0f220ac0afc.png)
 
