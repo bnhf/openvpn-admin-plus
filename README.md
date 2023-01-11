@@ -1,4 +1,4 @@
-# PiVPN-TAP-web-ui
+# OpenVPN-Admin-Plus
 
 ## Summary
 OpenVPN TAP/bridge or TUN (host-based) server web administration interface in a Docker container. Intended for use with PiVPN (on amd64/arm64/armv7 versions of Debian or Ubuntu, or on ARM64/ARMv7 with Raspberry Pi OS). PiVPN should be installed first and OpenVPN 2.5.x or above required!
