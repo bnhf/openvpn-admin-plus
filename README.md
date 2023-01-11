@@ -81,6 +81,7 @@ EMAIL=${EMAIL}
 OU=${OU}
 PIVPN_SERVER=${PIVPN_SERVER}
 PIVPN_CONF=${PIVPN_CONF}
+TZ=${TZ}
 ```
 
 This fork uses a single docker container with the OpenVPNAdmin web application. Through a docker volume it creates following directory structure for the database, but otherwise links to /etc/openvpn in the host. The intention is for PiVPN to be able to operate as usual, with PiVPN commanline options still available:
@@ -123,8 +124,8 @@ Optional, but recommended:
 
 Execute commands:
 
-    go get github.com/bnhf/pivpn-tap-web-ui
-    cd $GOPATH/src/github.com/bnhf/pivpn-tap-web-ui
+    go get github.com/bnhf/openvpn-admin-plus
+    cd $GOPATH/src/github.com/bnhf/openvpn-admin-plus
     go mod tidy
     bee run -gendoc=true
     bee pack -exr='^vendor|^data.db|^build|^README.md|^docs'
@@ -142,9 +143,6 @@ For building on ARM64 or ARMv7:
 
 ## Todo
 
-* Update "Memory usage" on the status page to display more accurate data -- Issue reported to CloudFoundry
-* Add certificate revocation from the GUI -- currently can be done only from the commandline via PiVPN -r username (or in the Cockpit Terminal!)
-* Move PiVPN server and server.conf variables from environment into Settings within OpenVPNAdmin
 * Test with TUN and TAP running concurrently
 
 ## License
