@@ -1,4 +1,4 @@
-# PiVPN-TAP-web-ui
+# OpenVPN-Admin-Plus
 
 ## Summary
 OpenVPN TAP/bridge or TUN (host-based) server web administration interface in a Docker container. Intended for use with PiVPN (on amd64/arm64/armv7 versions of Debian or Ubuntu, or on ARM64/ARMv7 with Raspberry Pi OS). PiVPN should be installed first and OpenVPN 2.5.x or above required!
@@ -17,7 +17,7 @@ Goal: create quick to deploy and easy to use solution that makes work with small
 
 If you have docker and Portainer installed, you can jump directly to [installation](#Prod).
 
-![Status page](https://user-images.githubusercontent.com/41088895/155858300-95d0b0aa-4568-42f2-9734-52a39139cf18.png)
+![Status page](https://user-images.githubusercontent.com/41088895/211678414-57d18b6e-0ba0-4f30-b7d5-deebdc592252.png)
 
 If you have a functioning OpenVPN TAP or TUN Server on the same host as your Docker containers, you should be able to use this fork to monitor OpenVPN connections.
 
@@ -39,12 +39,11 @@ Certificate generation and management is also available, and should be compatibl
 
 ## Screenshots
 
-![Screenshot 2022-02-26 113330](https://user-images.githubusercontent.com/41088895/155858411-f0413188-2481-473a-891b-4e4305e3e515.png)
+![screenshot-nuc10-pc2 localdomain-2023 01 10-14_51_43](https://user-images.githubusercontent.com/41088895/211678711-b41de1c8-590f-45c0-9048-091ed1265211.png)
 
-![screenshot-raspberrypi5_8080-2022 02 26-14_10_25](https://user-images.githubusercontent.com/41088895/155859338-b7ca2743-b702-4eff-a2d5-31144d4a1be8.png)
+![screenshot-nuc10-pc2 localdomain_8080-2023 01 10-15_11_54](https://user-images.githubusercontent.com/41088895/211678760-ed8a8425-21db-4f28-b6f0-51078450d2d8.png)
 
-
-![Screenshot 2022-02-26 113707](https://user-images.githubusercontent.com/41088895/155858443-581b9206-327b-4df3-ac14-cd310cae768e.png)
+![screenshot-nuc10-pc2 localdomain-2023 01 10-14_45_55](https://user-images.githubusercontent.com/41088895/211678922-c107f5d8-b642-40f3-8f5a-ae3a2cd6d662.png)
 
 ![Screenshot 2022-02-26 113822](https://user-images.githubusercontent.com/41088895/155858448-cced00d9-b931-4e85-a77f-f0f220ac0afc.png)
 
@@ -82,6 +81,7 @@ EMAIL=${EMAIL}
 OU=${OU}
 PIVPN_SERVER=${PIVPN_SERVER}
 PIVPN_CONF=${PIVPN_CONF}
+TZ=${TZ}
 ```
 
 This fork uses a single docker container with the OpenVPNAdmin web application. Through a docker volume it creates following directory structure for the database, but otherwise links to /etc/openvpn in the host. The intention is for PiVPN to be able to operate as usual, with PiVPN commanline options still available:
@@ -124,8 +124,8 @@ Optional, but recommended:
 
 Execute commands:
 
-    go get github.com/bnhf/pivpn-tap-web-ui
-    cd $GOPATH/src/github.com/bnhf/pivpn-tap-web-ui
+    go get github.com/bnhf/openvpn-admin-plus
+    cd $GOPATH/src/github.com/bnhf/openvpn-admin-plus
     go mod tidy
     bee run -gendoc=true
     bee pack -exr='^vendor|^data.db|^build|^README.md|^docs'
@@ -143,9 +143,6 @@ For building on ARM64 or ARMv7:
 
 ## Todo
 
-* Update "Memory usage" on the status page to display more accurate data -- Issue reported to CloudFoundry
-* Add certificate revocation from the GUI -- currently can be done only from the commandline via PiVPN -r username (or in the Cockpit Terminal!)
-* Move PiVPN server and server.conf variables from environment into Settings within OpenVPNAdmin
 * Test with TUN and TAP running concurrently
 
 ## License
