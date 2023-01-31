@@ -70,18 +70,18 @@ Setup your Portainer Stacks page as shown on an amd64/arm64/armv7 machine runnin
 
 Copy and paste this into the Portainer Environment variables section in Advanced Mode, then switch to Simple mode to input your values. Leave USERNAME and PASSWORD default values, as you'll change those after you login for the first time by clicking on Admistrator - Profile:
 
-```
-OPENVPN_ADMIN_USERNAME=admin
-OPENVPN_ADMIN_PASSWORD=b3secure
-COUNTRY=${COUNTRY}
-PROVINCE=${PROVINCE}
-CITY=${CITY}
-ORG=${ORG}
-EMAIL=${EMAIL}
-OU=${OU}
-PIVPN_SERVER=${PIVPN_SERVER}
-PIVPN_CONF=${PIVPN_CONF}
-TZ=${TZ}
+```yml
+ OPENVPN_ADMIN_USERNAME=admin # Leave this default as-is and update on first-run
+ OPENVPN_ADMIN_PASSWORD=b3secure # Leave this default as-is and update on first-run
+ COUNTRY=${COUNTRY} # Country, Province, City, Org and OU are used by EasyRSA
+ PROVINCE=${PROVINCE} # Province or State
+ CITY=${CITY}
+ ORG=${ORG} # Organization - Use your company name here or make one up
+ EMAIL=${EMAIL}
+ OU=${OU} # Organizational Unit - Use your company department name or make one up
+ PIVPN_SERVER=${PIVPN_SERVER} # The unique name used for your server's certificate and key. Found in the /etc/openvpn/server.conf file.
+ PIVPN_CONF=${PIVPN_CONF} # Filename for your OpenVPN server configuration - usually server.conf
+ TZ=${TZ} # Your OpenVPN server's timezone
 ```
 
 This fork uses a single docker container with the OpenVPNAdmin web application. Through a docker volume it creates following directory structure for the database, but otherwise links to /etc/openvpn in the host. The intention is for PiVPN to be able to operate as usual, with PiVPN commanline options still available:
