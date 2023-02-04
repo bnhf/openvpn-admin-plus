@@ -66,7 +66,7 @@ Requirements:
 
 Setup your Portainer Stacks page as shown on an amd64/arm64/armv7 machine running Debian or its derivations, inserting environment variables for creating certificates. Also, you'll need the unique ID assigned by PiVPN to the server (the name used for the server certificate and key, which is the hostname followed by a series of numbers, letters and dashes). And finally, you'll need to supply the name of the server configuration file you'd like to use (usually server.conf):
 
-![screenshot-nuc10-pc2_9000-2022 03 10-16_45_46](https://user-images.githubusercontent.com/41088895/158028969-697904b4-b819-4847-adaf-9483f57b3e28.png)
+![screencapture-brix-pc2-9000-2023-02-04-14_15_54](https://user-images.githubusercontent.com/41088895/216790336-32dbaebe-7f6d-4c82-8b13-db55fc59c7d6.png)
 
 Copy and paste this into the Portainer Environment variables section in Advanced Mode, then switch to Simple mode to input your values. Leave USERNAME and PASSWORD default values, as you'll change those after you login for the first time by clicking on Admistrator - Profile:
 
