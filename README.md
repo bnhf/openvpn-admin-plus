@@ -68,7 +68,7 @@ Setup your Portainer Stacks page as shown on an amd64/arm64/armv7 machine runnin
 
 ![screencapture-brix-pc2-9000-2023-02-04-14_15_54](https://user-images.githubusercontent.com/41088895/216790336-32dbaebe-7f6d-4c82-8b13-db55fc59c7d6.png)
 
-Copy and paste this into the Portainer Environment variables section in Advanced Mode, then switch to Simple mode to input your values. Leave USERNAME and PASSWORD default values, as you'll change those after you login for the first time by clicking on Admistrator - Profile:
+Copy and paste this into the Portainer Environment variables section in Advanced Mode, then switch to Simple mode to input your values. Replace the ${variable} with your actual values, and remove the comment portions that begin with #. Leave USERNAME and PASSWORD default values, as you'll change those after you login for the first time by clicking on Admistrator - Profile:
 
 ```yml
  OPENVPN_ADMIN_USERNAME=admin # Leave this default as-is and update on first-run
