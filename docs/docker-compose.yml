@@ -1,8 +1,12 @@
-version: '3'
+version: "3"
 services:
   gui:
     image: bnhf/openvpn-admin-plus:latest
-    container_name: openvpn-gui-tap
+    container_name: openvpn-admin-plus
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
     environment:
     - OPENVPN_ADMIN_USERNAME=admin # Leave this default as-is and update on first-run
     - OPENVPN_ADMIN_PASSWORD=b3secure # Leave this default as-is and update on first-run
@@ -15,8 +19,13 @@ services:
     - PIVPN_SERVER=${PIVPN_SERVER} # The unique name used for your server's certificate and key. Found in the /etc/openvpn/server.conf file.
     - PIVPN_CONF=${PIVPN_CONF} # Filename for your OpenVPN server configuration - usually server.conf
     - TZ=${TZ} # Your OpenVPN server's timezone
+    - ENABLEHTTPS=${ENABLEHTTPS} # Enable HTTPS protocol
+    - HTTPSPORT=${HTTPSPORT} # Specify the HTTPS port number
+    - HTTPSCERT=${HTTPSCERT} # The path to the SSL-certificate (for example: /etc/openvpn/server/ssl/openvpn-server.crt)
+    - HTTPSKEY=${HTTPSKEY} # The path to the private key (for example: /etc/openvpn/server/ssl/openvpn-server.key)
     ports:
      - "8080:8080/tcp"
+     - "8443:8443/tcp"
     restart: always
     volumes:
      - /etc/openvpn:/etc/openvpn
