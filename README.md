@@ -73,7 +73,7 @@ Copy and paste this into the Portainer Environment variables section in Advanced
 ```yml
  OPENVPN_ADMIN_USERNAME=admin # Leave this default as-is and update on first-run
  OPENVPN_ADMIN_PASSWORD=b3secure # Leave this default as-is and update on first-run
- COUNTRY=${COUNTRY} # Country, Province, City, Org and OU are used by EasyRSA
+ COUNTRY=${COUNTRY} # Two character country code. Country, Province, City, Org and OU are used by EasyRSA
  PROVINCE=${PROVINCE} # Province or State
  CITY=${CITY}
  ORG=${ORG} # Organization - Use your company name here or make one up
