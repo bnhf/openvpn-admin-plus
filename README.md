@@ -73,15 +73,18 @@ Copy and paste this into the Portainer Environment variables section in Advanced
 ```yml
  OPENVPN_ADMIN_USERNAME=admin # Leave this default as-is and update on first-run
  OPENVPN_ADMIN_PASSWORD=b3secure # Leave this default as-is and update on first-run
+ PIVPN_CONF=server.conf # Filename for your OpenVPN server configuration
  COUNTRY=${COUNTRY} # Two character country code. Country, Province, City, Org and OU are used by EasyRSA
  PROVINCE=${PROVINCE} # Province or State
  CITY=${CITY}
  ORG=${ORG} # Organization - Use your company name here or make one up
  EMAIL=${EMAIL}
  OU=${OU} # Organizational Unit - Use your company department name or make one up
- PIVPN_SERVER=${PIVPN_SERVER} # The unique name used for your server's certificate and key. Found in the /etc/openvpn/server.conf file.
- PIVPN_CONF=${PIVPN_CONF} # Filename for your OpenVPN server configuration - usually server.conf
  TZ=${TZ} # Your OpenVPN server's timezone
+ ENABLEHTTPS=${ENABLEHTTPS} # Enable HTTPS protocol
+ HTTPSPORT=${HTTPSPORT} # Specify the HTTPS port number
+ HTTPSCERT=${HTTPSCERT} # The path to the SSL-certificate (for example: /etc/openvpn/server/ssl/openvpn-server.crt)
+ HTTPSKEY=${HTTPSKEY} # The path to the private key (for example: /etc/openvpn/server/ssl/openvpn-server.key)
 ```
 
 This fork uses a single docker container with the OpenVPNAdmin web application. Through a docker volume it creates following directory structure for the database, but otherwise links to /etc/openvpn in the host. The intention is for PiVPN to be able to operate as usual, with PiVPN commanline options still available:
