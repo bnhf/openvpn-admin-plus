@@ -73,7 +73,7 @@ func createDefaultUsers() {
 func createDefaultSettings() {
 	s := Settings{
 		Profile:       "default",
-		MIAddress:     "openvpn:2080",
+		MIAddress:     "172.17.0.1:2080",
 		MINetwork:     "tcp",
 		ServerAddress: "myopenvpnserver.duckdns.org",
 		OVConfigPath:  "/etc/openvpn/",
